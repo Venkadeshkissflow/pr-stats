@@ -9,7 +9,8 @@ gitHookRoute.post('/', async (ctx) => {
 	console.log('in coming body data ', payload);
 	const reviewers = payload.reviewers;
 	for (let review of reviewers) {
-		await addAuthor(ctx, { ...review.author, commentsCount: review.stats.totalComments });
+		const {totalComments, timeToReview, totalReviews} = review.stats;
+		await addAuthor(ctx, { ...review.author, totalComments, timeToReview, totalReviews});
 		await addReviews(ctx, review);
 	}
 	return ctx.json({ message: 'Success' });

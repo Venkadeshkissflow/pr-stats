@@ -1,13 +1,13 @@
 export async function addAuthor(ctx, author) {
 	const res = await ctx.env.DB.prepare(
-		`INSERT INTO author(id, name, profileUrl, avatarUrl, totalCommants)
-   VALUES(?1, ?2, ?3, ?4, ?5)
+		`INSERT INTO author(id, name, profileUrl, avatarUrl, totalCommants, timeToReview, totalReviews)
+   VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7)
    ON CONFLICT(id) DO 
-   UPDATE SET name=?2, profileUrl=?3, avatarUrl=?4, totalCommants=?5
+   UPDATE SET name=?2, profileUrl=?3, avatarUrl=?4, totalCommants=?5, timeToReview=?6, totalReviews=?7
    `
 	)
-		.bind(author.id, author.login, author.url, author.avatarUrl, author.totalCommants)
-		.run();
+		.bind(author.id, author.login, author.url, author.avatarUrl, author.totalCommants, author.timeToReview, author.totalReviews)
+		.all();
 
 	return {
 		success: res.success,

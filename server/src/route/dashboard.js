@@ -10,6 +10,16 @@ dashboardRoute.get('/author', async (ctx) => {
 	return ctx.json(authorList);
 });
 
+dashboardRoute.get('/totalCommentsCount', async (ctx) => {
+	// return all users;
+	const listOfAuthors = await getAuthorList(ctx);
+	 const totalCommentsCount = listOfAuthors.reduce(
+		(accumulator, currentValue) => accumulator + currentValue.totalComments,
+		0,
+	  );
+	return ctx.json(totalCommentsCount);
+});
+
 dashboardRoute.get('/author/:authorId', async (ctx) => {
 	// return all dashboard metric for given user;
 	const searchParams = ctx.req.query();
