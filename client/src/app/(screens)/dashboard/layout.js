@@ -134,7 +134,7 @@ function ReviewersList({
   const router = useRouter();
 
   if (isLoading) return <p>Loading...</p>;
-  if (reviewersList.length === 0) return <p>No profile data</p>;
+  if (reviewersList.length === 0) return <p>No profile data found</p>;
 
   return reviewersList.map((reviewerInfo) => (
     <ReviewerInfoCard

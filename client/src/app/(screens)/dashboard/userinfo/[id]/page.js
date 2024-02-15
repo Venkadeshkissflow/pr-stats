@@ -7,15 +7,14 @@ async function getUserData(id) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch reviewerInfo");
   }
 
   return res.json();
 }
 
 export default async function User({ params }) {
-  const data = await getUserData(params.id);
-  console.log(data, "data api test");
+  const reviewerInfo = await getUserData(params.id);
 
   function getFormattedDate(originalData) {
     const date = new Date(originalData);
@@ -27,25 +26,28 @@ export default async function User({ params }) {
     return `${day}/${month}/${year}`;
   }
 
-  const sumOfCommentsCount = data.reviews.reduce(
+  const sumOfCommentsCount = reviewerInfo.reviews.reduce(
     (accumulator, { commentsCount }) => {
       return accumulator + commentsCount;
     },
     0
   );
 
-  const sumOfReviewTime = data.reviews.reduce((accumulator, { reviewTime }) => {
-    return accumulator + reviewTime;
-  }, 0);
+  const sumOfReviewTime = reviewerInfo.reviews.reduce(
+    (accumulator, { reviewTime }) => {
+      return accumulator + reviewTime;
+    },
+    0
+  );
 
-  const formattedData = data.reviews.map(function formatteDataForClientSide(
-    prInfo
-  ) {
-    return {
-      ...prInfo,
-      submittedAt: getFormattedDate(prInfo.submittedAt),
-    };
-  });
+  const formattedData = reviewerInfo.reviews.map(
+    function formatteDataForClientSide(prInfo) {
+      return {
+        ...prInfo,
+        submittedAt: getFormattedDate(prInfo.submittedAt),
+      };
+    }
+  );
 
   return (
     <div className="h-auto overflow-y-auto grid auto-rows-max p-4 gap-4 w-full">
@@ -75,6 +77,12 @@ export default async function User({ params }) {
           colors={["lime", "cyan"]}
           // valueFormatter={axisFormatter}
         />
+      </Card>
+      <Card>
+        <Title>Pending pr's</Title>
+        {reviewerInfo.reviews.map(({ pullRequestId }) => (
+          <li key={pullRequestId}>pr id: {pullRequestId}</li>
+        ))}
       </Card>
     </div>
   );

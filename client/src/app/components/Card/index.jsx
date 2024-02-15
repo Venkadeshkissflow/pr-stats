@@ -5,11 +5,13 @@ import PropTypes from "prop-types";
 
 import { Card } from "@tremor/react";
 
-ReviewerInfoCard.PropTypes = {
+ReviewerInfoCard.propTypes = {
   title: PropTypes.string,
   avatar: PropTypes.string,
   className: PropTypes.string,
   onHandleClick: PropTypes.func,
+  isActive: PropTypes.bool,
+  reviewerInfo: PropTypes.object,
 };
 
 export default function ReviewerInfoCard({
