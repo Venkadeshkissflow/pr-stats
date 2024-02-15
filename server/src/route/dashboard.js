@@ -6,7 +6,6 @@ import { getDasboardForAuthor } from '../service/review.js';
 
 dashboardRoute.get('/author', async (ctx) => {
 	// return all users;
-	console.log(ctx, 'ctx venky****');
 	const authorList = await getAuthorList(ctx);
 	return ctx.json(authorList);
 });

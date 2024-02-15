@@ -15,7 +15,11 @@ export async function addAuthor(ctx, author) {
 }
 
 export async function getAuthorList(ctx, filter) {
-	const rep = await ctx.env.DB.prepare(`SELECT * FROM author`).run();
-	console.log(rep, 'rep statscheck**');
-	return rep.results;
+	// const rep = await ctx.env.DB.prepare(`SELECT * FROM author`).run();
+	// console.log(rep, 'rep statscheck**');
+	// return rep.results;
+	const { results } = await ctx.env.DB.prepare(
+		"SELECT * FROM author"
+	  ).all();
+	  return results;
 }
