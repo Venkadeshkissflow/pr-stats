@@ -1,26 +1,24 @@
 {
+  "name": "dashboard-stats",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
-    "start": "next start"
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/tailwindcss": "^0.2.0",
-    "@heroicons/react": "^1.0.6",
-    "@tremor/react": "^3.8.2",
-    "framer-motion": "^10.16.4",
-    "next": "latest",
-    "next-auth": "^4.23.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "engines": {
-    "node": ">=18"
+    "@tremor/react": "^3.9.2",
+    "next": "13.5.5",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.3"
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.5",
+    "postcss": "^8",
+    "tailwindcss": "^3"
   }
 }
