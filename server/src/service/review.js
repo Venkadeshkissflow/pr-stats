@@ -42,6 +42,6 @@ export async function getDasboardForAuthor(ctx, filter = {}) {
 		} GROUP BY pullRequestId ORDER BY submittedAt`
 	)
 		.bind(filter.authorId)
-		.run();
+		.all();
 	return res.results;
 }
