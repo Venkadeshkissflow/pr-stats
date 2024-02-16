@@ -1,5 +1,6 @@
 // import { PERIOD_BASE_FILTER } from "@/app/common";
 import { TopReviewers } from "./topreviewers";
+import { getContributors, pullRequestList, getCommentsCount } from "../service";
 
 const PERIOD_BASE_FILTER = {
 	LAST_30DAYS: { id: "last-30days", label: "last 30 days" },
@@ -7,47 +8,10 @@ const PERIOD_BASE_FILTER = {
 	LAST_ONEWEEK: { id: "last-1week", label: "last 1 week" },
 };
 
-async function getContributors(id) {
-	console.log(id, "params api test");
-	const res = await fetch(
-		`https://api.github.com/repos/Venkadeshkissflow/kf-pr-dashboard/contributors`
-	);
-
-	if (!res.ok) {
-		throw new Error("Failed to fetch reviewerInfo");
-	}
-
-	return res.json();
-}
-
-async function pullRequestList() {
-	const res = await fetch(
-		"https://api.github.com/repos/Venkadeshkissflow/kf-pr-dashboard/pulls"
-	);
-
-	if (!res.ok) {
-		throw new Error("Failed to fetch reviewerInfo");
-	}
-
-	return res.json();
-}
-
-async function getCommentsCount() {
-	const res = await fetch(
-		"https://api.github.com/repos/Venkadeshkissflow/kf-pr-dashboard/pulls/comments"
-	);
-
-	if (!res.ok) {
-		throw new Error("Failed to fetch reviewerInfo");
-	}
-
-	return res.json();
-}
-
 export default async function CommonInfo() {
 	const contributorsList = await getContributors();
 	const pullRequestsList = await pullRequestList();
-	const commentsCount = await getCommentsCount();
+	const { commentsCount } = await getCommentsCount();
 
 	return (
 		<>
@@ -70,7 +34,7 @@ export default async function CommonInfo() {
 						value={contributorsList.length}
 					/>
 					<InfoCard title={"Total Open prs"} value={pullRequestsList.length} />
-					<InfoCard title={"Total Comments"} value={commentsCount.length} />
+					<InfoCard title={"Total Comments"} value={commentsCount} />
 				</div>
 				<TopReviewers />
 			</div>
