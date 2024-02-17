@@ -16,3 +16,5 @@ export const PR_STATS_DOMAIN_URL =
 
 export const GITHUB_ACTION_DOMAIN_URL =
 	"https://api.github.com/repos/Venkadeshkissflow/kf-pr-dashboard";
+
+export const TOP_REVIEWERS_COUNT = 5;

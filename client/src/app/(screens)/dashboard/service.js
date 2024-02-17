@@ -46,3 +46,17 @@ export async function getAuthorInfo(id) {
 
 	return res.json();
 }
+
+export async function getAuthorList() {
+	const res = await fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/author`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	if (!res.ok) {
+		throw new Error("Failed to fetch reviewerInfo");
+	}
+
+	return res.json();
+}

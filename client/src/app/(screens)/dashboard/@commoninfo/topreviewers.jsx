@@ -1,105 +1,91 @@
-const people = [
-    {
-      name: "Jane Cooper",
-      title: "Regional Paradigm Technician",
-      totalComments: "98",
-      totalReviewTime: "4hr12min",
-      email: "jane.cooper@example.com",
-      image: "https://bit.ly/33HnjK0",
-    },
-    {
-      name: "John Doe",
-      title: "Regional Paradigm Technician",
-      totalComments: "98",
-      totalReviewTime: "4hr12min",
-      email: "john.doe@example.com",
-      image: "https://bit.ly/3I9nL2D",
-    },
-    {
-      name: "Veronica Lodge",
-      title: "Regional Paradigm Technician",
-      totalComments: "98",
-      totalReviewTime: "4hr12min",
-      email: "veronica.lodge@example.com",
-      image: "https://bit.ly/3vaOTe1",
-    },
-    // More people...
-  ];
-  
-  export function TopReviewers() {
-    return (
-      <div className="flex flex-col">
-        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Total comments
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Total review time
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {people.map((person) => (
-                    <tr key={person.email}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 h-10 w-10">
-                            <img
-                              className="h-10 w-10 rounded-full"
-                              src={person.image}
-                              alt=""
-                            />
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
-                              {person.name}
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              {person.email}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
-                          {person.totalComments}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {person.department}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span
-                          className="px-2 inline-flex text-xs leading-5
+import { TOP_REVIEWERS_COUNT } from "@/app/constant";
+import { convertMsToTime } from "../util";
+
+export function TopReviewers({ authorList }) {
+	let topReviewers = authorList
+		.sort((a, b) => b.totalComments - a.totalComments)
+		.slice(0, TOP_REVIEWERS_COUNT);
+	return (
+		<div className="flex flex-col">
+			<div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+				<div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+					<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+						<table className="min-w-full divide-y divide-gray-200">
+							<thead className="bg-gray-50">
+								<tr>
+									<th
+										scope="col"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									>
+										Name
+									</th>
+									<th
+										scope="col"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									>
+										Total comments
+									</th>
+									<th
+										scope="col"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									>
+										Total Reviews
+									</th>
+									<th
+										scope="col"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									>
+										Total review time
+									</th>
+								</tr>
+							</thead>
+							<tbody className="bg-white divide-y divide-gray-200">
+								{topReviewers.map((person) => (
+									<tr key={person.id}>
+										<td className="px-6 py-4 whitespace-nowrap">
+											<div className="flex items-center">
+												<div className="flex-shrink-0 h-10 w-10">
+													<img
+														className="h-10 w-10 rounded-full"
+														src={person.avatarUrl}
+														alt=""
+													/>
+												</div>
+												<div className="ml-4">
+													<div className="text-sm font-medium text-gray-900">
+														{person.name}
+													</div>
+													<div className="text-sm text-gray-500">
+														{person.profileUrl}
+													</div>
+												</div>
+											</div>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap">
+											<div className="text-sm text-gray-900">
+												{person.totalComments}
+											</div>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap">
+											<div className="text-sm text-gray-500">
+												{person.totalReviews}
+											</div>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap">
+											<span
+												className="px-2 inline-flex text-xs leading-5
                           font-semibold rounded-full bg-green-100 text-green-800"
-                        >
-                          {person.totalReviewTime}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+											>
+												{convertMsToTime(person.timeToReview)}
+											</span>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}

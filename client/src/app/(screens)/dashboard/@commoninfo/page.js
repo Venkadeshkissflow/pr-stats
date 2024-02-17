@@ -1,6 +1,11 @@
 // import { PERIOD_BASE_FILTER } from "@/app/common";
 import { TopReviewers } from "./topreviewers";
-import { getContributors, pullRequestList, getCommentsCount } from "../service";
+import {
+	getContributors,
+	pullRequestList,
+	getCommentsCount,
+	getAuthorList,
+} from "../service";
 
 const PERIOD_BASE_FILTER = {
 	LAST_30DAYS: { id: "last-30days", label: "last 30 days" },
@@ -12,6 +17,7 @@ export default async function CommonInfo() {
 	const contributorsList = await getContributors();
 	const pullRequestsList = await pullRequestList();
 	const { commentsCount } = await getCommentsCount();
+	const authorList = await getAuthorList();
 
 	return (
 		<>
@@ -36,7 +42,7 @@ export default async function CommonInfo() {
 					<InfoCard title={"Total Open prs"} value={pullRequestsList.length} />
 					<InfoCard title={"Total Comments"} value={commentsCount} />
 				</div>
-				<TopReviewers />
+				<TopReviewers authorList={authorList} />
 			</div>
 		</>
 	);
