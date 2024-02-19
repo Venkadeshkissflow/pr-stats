@@ -4,6 +4,7 @@ import { getAuthorInfo } from "../../service";
 import { ReviewTimeChart } from "./reviewTimeChart";
 import { CommentsCountChart } from "./commentsCountChart";
 import { convertMsToTime } from "../../util";
+import { InfoCard } from "@/app/components/InfoCard";
 
 async function getUserData(id) {
 	console.log(id, "params api test");
@@ -57,20 +58,11 @@ export default async function User({ params }) {
 	return (
 		<div className="h-auto overflow-y-auto grid auto-rows-max p-4 gap-4 w-full">
 			<div className="flex gap-4">
-				<Card>
-					<div></div>
-					<Title>Comments count</Title>
-					<div className="font-bold	text-lg text-cyan-600	">
-						{sumOfCommentsCount}
-					</div>
-				</Card>
-				<Card>
-					<div></div>
-					<Title>Review time</Title>
-					<div className="font-bold	text-lg text-lime-600	">
-						{convertMsToTime(sumOfReviewTime)}
-					</div>
-				</Card>
+				<InfoCard title={"Comments count"} value={sumOfCommentsCount} />
+				<InfoCard
+					title={"Review time"}
+					value={convertMsToTime(sumOfReviewTime)}
+				/>
 			</div>
 			<div className="flex gap-4">
 				<div className="flex-1">
