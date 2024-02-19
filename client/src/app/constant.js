@@ -18,3 +18,9 @@ export const GITHUB_ACTION_DOMAIN_URL =
 	"https://api.github.com/repos/Venkadeshkissflow/kf-pr-dashboard";
 
 export const TOP_REVIEWERS_COUNT = 5;
+
+export const TIME_RANGE = {
+	LAST_30DAYS: { id: "last-30days", label: "last 30 days" },
+	LAST_15DAYS: { id: "last-15days", label: "last 15 days" },
+	LAST_ONEWEEK: { id: "last-1week", label: "last 1 week" },
+};

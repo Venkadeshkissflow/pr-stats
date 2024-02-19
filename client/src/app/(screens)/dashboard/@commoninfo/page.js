@@ -1,4 +1,3 @@
-// import { PERIOD_BASE_FILTER } from "@/app/common";
 import { TopReviewers } from "./topreviewers";
 import {
 	getContributors,
@@ -6,12 +5,7 @@ import {
 	getCommentsCount,
 	getAuthorList,
 } from "../service";
-
-const PERIOD_BASE_FILTER = {
-	LAST_30DAYS: { id: "last-30days", label: "last 30 days" },
-	LAST_15DAYS: { id: "last-15days", label: "last 15 days" },
-	LAST_ONEWEEK: { id: "last-1week", label: "last 1 week" },
-};
+import { TIME_RANGE } from "@/app/constant";
 
 export default async function CommonInfo() {
 	const contributorsList = await getContributors();
@@ -23,7 +17,7 @@ export default async function CommonInfo() {
 		<>
 			<header className="flex justify-end w-full border-b-2 p-2">
 				<select className="border-2 p-2 rounded-lg">
-					{Object.values(PERIOD_BASE_FILTER).map((filterInfo) => {
+					{Object.values(TIME_RANGE).map((filterInfo) => {
 						return (
 							<option key={filterInfo.id} value={filterInfo.id}>
 								{filterInfo.label}

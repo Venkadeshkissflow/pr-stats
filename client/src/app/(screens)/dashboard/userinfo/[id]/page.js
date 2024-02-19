@@ -1,6 +1,8 @@
 import { Card, Title, LineChart } from "@tremor/react";
 import { getAuthorInfo } from "../../service";
 
+import { ReviewTimeChart } from "./reviewTimeChart";
+
 async function getUserData(id) {
 	console.log(id, "params api test");
 	const res = await fetch(
@@ -68,25 +70,27 @@ export default async function User({ params }) {
 					</div>
 				</Card>
 			</div>
-			<Card>
-				<Title>Reviewer chart</Title>
-				<LineChart
-					className="mt-6"
-					data={formattedData}
-					index="submittedAt"
-					categories={["commentsCount"]}
-					colors={["cyan"]}
-					// valueFormatter={axisFormatter}
-				/>
-				<LineChart
-					className="mt-6"
-					data={formattedData}
-					index="submittedAt"
-					categories={["reviewTime"]}
-					colors={["lime"]}
-					// valueFormatter={axisFormatter}
-				/>
-			</Card>
+			<div className="flex gap-4">
+				<div className="flex-1">
+					<Card>
+						<Title>Comments chart</Title>
+						<LineChart
+							className="mt-6"
+							data={formattedData}
+							index="submittedAt"
+							categories={["commentsCount"]}
+							colors={["cyan"]}
+							// valueFormatter={axisFormatter}
+						/>
+					</Card>
+				</div>
+				<div className="flex-1">
+					<Card>
+						<Title>Reviewe time chart</Title>
+						<ReviewTimeChart reviewers={reviewerInfo.reviews} />
+					</Card>
+				</div>
+			</div>
 			<Card>
 				<Title>Pending pr's</Title>
 				{reviewerInfo.reviews.map(({ pullRequestId }) => (
