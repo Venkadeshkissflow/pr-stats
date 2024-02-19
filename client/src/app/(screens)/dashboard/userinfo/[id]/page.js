@@ -2,6 +2,8 @@ import { Card, Title, LineChart } from "@tremor/react";
 import { getAuthorInfo } from "../../service";
 
 import { ReviewTimeChart } from "./reviewTimeChart";
+import { CommentsCountChart } from "./commentsCountChart";
+import { convertMsToTime } from "../../util";
 
 async function getUserData(id) {
 	console.log(id, "params api test");
@@ -66,7 +68,7 @@ export default async function User({ params }) {
 					<div></div>
 					<Title>Review time</Title>
 					<div className="font-bold	text-lg text-lime-600	">
-						{sumOfReviewTime}
+						{convertMsToTime(sumOfReviewTime)}
 					</div>
 				</Card>
 			</div>
@@ -74,14 +76,7 @@ export default async function User({ params }) {
 				<div className="flex-1">
 					<Card>
 						<Title>Comments chart</Title>
-						<LineChart
-							className="mt-6"
-							data={formattedData}
-							index="submittedAt"
-							categories={["commentsCount"]}
-							colors={["cyan"]}
-							// valueFormatter={axisFormatter}
-						/>
+						<CommentsCountChart reviewers={reviewerInfo.reviews} />
 					</Card>
 				</div>
 				<div className="flex-1">
