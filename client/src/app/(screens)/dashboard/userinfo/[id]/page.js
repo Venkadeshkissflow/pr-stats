@@ -63,6 +63,10 @@ export default async function User({ params }) {
 					title={"Review time"}
 					value={convertMsToTime(sumOfReviewTime)}
 				/>
+				<InfoCard
+					title={"Total reviewed prs"}
+					value={reviewerInfo.totalReviewedPr}
+				/>
 			</div>
 			<div className="flex gap-4">
 				<div className="flex-1">

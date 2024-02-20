@@ -6,6 +6,7 @@ import {
 	getAuthorList,
 } from "../service";
 import { TIME_RANGE } from "@/app/constant";
+import { InfoCard } from "@/app/components/InfoCard";
 
 export default async function CommonInfo() {
 	const contributorsList = await getContributors();
