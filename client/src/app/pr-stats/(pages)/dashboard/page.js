@@ -1,25 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Toolbar } from "../../(components)/toolbar";
-import { getAuthorList, getAuthorInfo } from "../../route";
+import { AUTHORS_LIST } from "./MOCK";
+import { Table } from "../../(components)/table";
+
+import { Card } from "@tremor/react";
 
 export default function Page() {
-	const [authors, setAuthors] = useState([]);
-	const [loading, setLoading] = useState(true);
-
-	async function onGetAuthorsList() {
-		let authorsList = await getAuthorInfo("saravanan10393");
-		console.log(authorsList, "authorsList");
-		setAuthors(authorsList);
-		setLoading(false);
-	}
-
-	useEffect(function onLoad() {
-		onGetAuthorsList();
-	}, []);
-
 	function onFilterChange(event) {
 		console.log(event, "filter chaneg");
 	}
@@ -27,16 +16,39 @@ export default function Page() {
 		console.log(event, "searchValue");
 	}
 	return (
-		<div className="flex flex-col border-2 border-sky-500 h-screen">
-			<div className="grow-0 shrink-0 basis-12 border-2 border-lime-500">
+		<div className="flex flex-col h-screen">
+			<div className="grow-0 p-2 shrink-0 basis-12 border-b-2">
 				<Toolbar onFilter={onFilterChange} onSearch={onSearchChange} />
 			</div>
-			<div className="grow shrink basis-auto overflow-scroll border-2 border-amber-500">
-				<div className="m-2 border-2 h-full">Table more</div>
+			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b-2">
+				<Table authorList={AUTHORS_LIST} />
 			</div>
-			<div className="grow-0 shrink-0 basis-20 border-2 border-lime-500">
-				Total info card
+			<div className="grow-0 p-2 shrink-0 basis-20 ">
+				<InfoCard />
 			</div>
 		</div>
+	);
+}
+
+function InfoCard() {
+	return (
+		<Card className=" flex justify-between rounded">
+			<div className="flex-1 p-2 flex align-center flex-col border-r-2">
+				<p>Total contributors</p>
+				<span>22</span>
+			</div>
+			<div className="flex-1 p-2 flex align-center flex-col border-r-2">
+				<p>Total Comments</p>
+				<span>22</span>
+			</div>
+			<div className="flex-1 p-2 flex align-center flex-col border-r-2">
+				<p>Total Reviews</p>
+				<span>22</span>
+			</div>
+			<div className="flex-1 p-2 flex align-center flex-col border-r-2">
+				<p>Total Review time</p>
+				<span>22</span>
+			</div>
+		</Card>
 	);
 }
