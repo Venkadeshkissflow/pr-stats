@@ -1,6 +1,8 @@
+"use client";
+
 import { convertMsToTime } from "../util";
 
-export function Table({ authorList }) {
+export function Table({ authorList, onRowClick }) {
 	return (
 		<div className="flex flex-col w-full">
 			<div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -37,7 +39,7 @@ export function Table({ authorList }) {
 							</thead>
 							<tbody className="bg-white divide-y divide-gray-200">
 								{authorList.map((person) => (
-									<tr key={person.id}>
+									<tr key={person.id} onClick={() => onRowClick(person)}>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="flex items-center">
 												<div className="flex-shrink-0 h-10 w-10">

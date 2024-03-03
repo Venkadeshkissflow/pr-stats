@@ -18,8 +18,13 @@ export async function getAuthorList(ctx, filter) {
 	// const rep = await ctx.env.DB.prepare(`SELECT * FROM author`).run();
 	// console.log(rep, 'rep statscheck**');
 	// return rep.results;
-	const { results } = await ctx.env.DB.prepare(
-		"SELECT * FROM author"
-	  ).all();
-	  return results;
+	const { results } = await ctx.env.DB.prepare('SELECT * FROM author').all();
+	return results;
+}
+
+export async function getAuthorInfo(ctx, id) {
+	console.log(id, 'author id crcta ?');
+	const { results } = await ctx.env.DB.prepare('SELECT * FROM author WHERE id = ?1').bind(id).all();
+	console.log(results, 'results crcta ?');
+	return results;
 }
