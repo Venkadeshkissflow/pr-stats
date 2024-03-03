@@ -47,7 +47,7 @@ export async function getAuthorInfo(id) {
 	return res.json();
 }
 
-export async function getAuthorPrInfo(id) {
+export async function getAuthorPrInfoApi(id) {
 	const res = await fetch(
 		`${PR_STATS_DOMAIN_URL}/pr-stats/api/author/stats/${id}`,
 		{
@@ -58,7 +58,7 @@ export async function getAuthorPrInfo(id) {
 	);
 
 	if (!res.ok) {
-		throw new Error("Failed to fetch reviewerInfo");
+		throw new Error("Failed to fetch getAuthorPrInfo");
 	}
 
 	return res.json();

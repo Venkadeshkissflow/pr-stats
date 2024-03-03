@@ -1,15 +1,38 @@
 import React from "react";
 
-import { getAuthorInfo } from "@/app/pr-stats/route";
+import { getAuthorPrInfoApi } from "@/app/pr-stats/route";
+import { Card } from "@tremor/react";
+import { ChartComponent } from "@/app/pr-stats/(components)/chart";
+import { getFormattedDate } from "@/app/pr-stats/util";
+import { ReviewTimeChartWrapper } from "../reviewtimechartwrapper";
 
 export default async function AuthorInfo({ params }) {
-	const authorInfo = await getAuthorInfo(params.id);
-	console.log(authorInfo, "author info");
+	console.log(params, "params me");
+	const authorInfo = await getAuthorPrInfoApi(params.id);
+
+	const { reviews: reviewers } = authorInfo;
+
+	const commentsCountFormattedData = reviewers.map(
+		function formatteDataForClientSide(prInfo) {
+			return {
+				...prInfo,
+				submittedAt: getFormattedDate(prInfo.submittedAt),
+			};
+		}
+	);
+
 	return (
-		<div>
-			<span>author info</span>
-			<span>{params.id}</span>
-			<div>ji{authorInfo.name}</div>
+		<div className="p-4 flex flex-col gap-y-4	">
+			<Card className="rounded">
+				<div className="border-b-2">Comments count</div>
+				<ChartComponent
+					data={commentsCountFormattedData}
+					index={"submittedAt"}
+					categories={["commentsCount"]}
+					colors={["cyan"]}
+				/>
+			</Card>
+			<ReviewTimeChartWrapper reviewers={reviewers} />
 		</div>
 	);
 }

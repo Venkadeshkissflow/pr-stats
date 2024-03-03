@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@remixicon/react": "^4.2.0",
     "@tremor/react": "^3.9.2",
     "next": "13.5.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "remixicon-react": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10",
