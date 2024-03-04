@@ -1,11 +1,15 @@
 "use client";
 
+import React, { useState } from "react";
+
 import { Button } from "@tremor/react";
 
 import { Card } from "@tremor/react";
 import { Icon } from "@tremor/react";
 
 import { RiGitPullRequestFill, RiArrowDownSFill } from "@remixicon/react";
+
+import styles from "./styles.module.css";
 
 export function ReviewedPrsList({ reviewers }) {
 	return (
@@ -29,29 +33,36 @@ export function ReviewedPrsList({ reviewers }) {
 }
 
 function PrInfoCard({ prTitle, prLink, commentsCount, timeToReview = 0 }) {
+	const [showReviewersList, setShowReviewersList] = useState(false);
+
+	function showAndHideReviewers() {
+		setShowReviewersList((prevState) => !prevState);
+	}
+
 	return (
-		<Card className="flex p-4 items-center gap-4">
-			<Icon
-				icon={RiGitPullRequestFill}
-				variant="simple"
-				size="md"
-				borderRadius="Roundness"
-			/>
-			<div className="flex flex-col grow shrink basis-auto">
-				<span className="text-slate-700 hover:text-blue-400	font-semibold text-base	cursor-default	cursor-pointer w-fit">
-					{prTitle}
-				</span>
-				{/* <span>{prLink}</span> */}
-				<div className="flex gap-4">
-					<span className="text-slate-500	text-sm	cursor-default ">
-						Comments count: {commentsCount}
+		<div>
+			<Card className="flex p-4 items-center gap-4 z-10">
+				<Icon
+					icon={RiGitPullRequestFill}
+					variant="simple"
+					size="md"
+					borderRadius="Roundness"
+				/>
+				<div className="flex flex-col grow shrink basis-auto">
+					<span className="text-slate-700 hover:text-blue-400	font-semibold text-base	cursor-default	cursor-pointer w-fit">
+						{prTitle}
 					</span>
-					<span className="text-slate-500	text-sm	cursor-default	">
-						Total reviewed time: {timeToReview}
-					</span>
+					{/* <span>{prLink}</span> */}
+					<div className="flex gap-4">
+						<span className="text-slate-500	text-sm	cursor-default ">
+							Comments count: {commentsCount}
+						</span>
+						<span className="text-slate-500	text-sm	cursor-default	">
+							Total reviewed time: {timeToReview}
+						</span>
+					</div>
 				</div>
-			</div>
-			{/* <Card className="grow-0 p-0 shrink-0 basis-40 flex flex-col items-center ">
+				{/* <Card className="grow-0 p-0 shrink-0 basis-40 flex flex-col items-center ">
 				<span className="w-full m-2 flex items-center justify-center border-b-2">
 					Comments count
 				</span>
@@ -63,14 +74,25 @@ function PrInfoCard({ prTitle, prLink, commentsCount, timeToReview = 0 }) {
 				</span>
 				<span>{timeToReview}</span>
 			</Card> */}
-			<Button
-				className="h-fit flex items-center"
-				variant="light"
-				icon={RiArrowDownSFill}
-				iconPosition={"right"}
+				<Button
+					className="h-fit flex items-center"
+					variant="light"
+					icon={RiArrowDownSFill}
+					iconPosition={"right"}
+					onClick={() => showAndHideReviewers()}
+				>
+					View reviewers
+				</Button>
+			</Card>
+			<Card
+				className={`p-0 ${styles.reviewersList} ${
+					showReviewersList
+						? styles.showReviewersList
+						: styles.hideReviewersList
+				}`}
 			>
-				View reviewers
-			</Button>
-		</Card>
+				Welcome
+			</Card>
+		</div>
 	);
 }
