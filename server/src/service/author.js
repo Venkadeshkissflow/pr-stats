@@ -23,8 +23,11 @@ export async function getAuthorList(ctx, filter) {
 }
 
 export async function getAuthorInfo(ctx, id) {
-	console.log(id, 'author id crcta ?');
 	const { results } = await ctx.env.DB.prepare('SELECT * FROM author WHERE id = ?1').bind(id).all();
-	console.log(results, 'results crcta ?');
+	return results;
+}
+
+export async function getAuthorReviewedPrs(ctx, id) {
+	const { results } = await ctx.env.DB.prepare('SELECT * FROM review WHERE authorId = ?1').bind(id).all();
 	return results;
 }

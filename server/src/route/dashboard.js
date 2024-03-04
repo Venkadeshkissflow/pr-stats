@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 const dashboardRoute = new Hono();
 
-import { getAuthorList, getAuthorInfo } from '../service/author.js';
+import { getAuthorList, getAuthorInfo, getAuthorReviewedPrs } from '../service/author.js';
 import { getDasboardForAuthor } from '../service/review.js';
 
 dashboardRoute.get('/author', async (ctx) => {
@@ -17,10 +17,10 @@ dashboardRoute.get('/author/:authorId', async (ctx) => {
 	return ctx.json(authorInfo);
 });
 
-dashboardRoute.get('/commentsCount', async (ctx) => {
-	const listOfAuthors = await getAuthorList(ctx);
-	const totalCommentsCount = listOfAuthors.reduce((accumulator, currentValue) => accumulator + currentValue.totalComments, 0);
-	return ctx.json({ commentsCount: totalCommentsCount });
+dashboardRoute.get('/author/reviewed-pr/:authorId', async (ctx) => {
+	// return all users;
+	const reviewedPrList = await getAuthorReviewedPrs(ctx, ctx.req.param().authorId);
+	return ctx.json(reviewedPrList);
 });
 
 dashboardRoute.get('/author/stats/:authorId', async (ctx) => {

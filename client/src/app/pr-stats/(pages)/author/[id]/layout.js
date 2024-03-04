@@ -12,7 +12,7 @@ export default async function AuthorInfoLayout({ children, params }) {
 	console.log(authorInfo, "params authorInfo");
 
 	return (
-		<div>
+		<div className="flex flex-col h-screen">
 			<HeaderComponent title={name} avatarUrl={avatarUrl} />
 			{children}
 		</div>

@@ -13,7 +13,7 @@ export function HeaderComponent({ title, avatarUrl }) {
 		router.push(`/pr-stats/author/`);
 	}
 	return (
-		<div className="border-b-2 flex items-center h-14 gap-x-4 px-4">
+		<div className="border-b-2 flex items-center h-14 gap-x-4 p-4">
 			<Icon
 				onClick={getBackToDashboard}
 				icon={RiArrowGoBackFill}
