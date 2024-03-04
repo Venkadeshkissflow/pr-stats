@@ -31,3 +31,10 @@ export async function getAuthorReviewedPrs(ctx, id) {
 	const { results } = await ctx.env.DB.prepare('SELECT * FROM review WHERE authorId = ?1').bind(id).all();
 	return results;
 }
+
+export async function getPrReviewersList(ctx, id) {
+	const { results: reviewersId } = await ctx.env.DB.prepare('SELECT * FROM review WHERE pullRequestId = ?1').bind(id).all();
+	const smt = await ctx.env.DB.prepare('SELECT * FROM author WHERE id = ?1');
+	const [{ results: reviewersInfoList }] = await ctx.env.DB.batch(reviewersId.map(({ authorId }) => smt.bind(authorId)));
+	return reviewersInfoList;
+}

@@ -1,26 +1,28 @@
 import { Hono } from 'hono';
 const dashboardRoute = new Hono();
 
-import { getAuthorList, getAuthorInfo, getAuthorReviewedPrs } from '../service/author.js';
+import { getAuthorList, getAuthorInfo, getAuthorReviewedPrs, getPrReviewersList } from '../service/author.js';
 import { getDasboardForAuthor } from '../service/review.js';
 
 dashboardRoute.get('/author', async (ctx) => {
-	// return all users;
 	const authorList = await getAuthorList(ctx);
 	return ctx.json(authorList);
 });
 
 dashboardRoute.get('/author/:authorId', async (ctx) => {
-	// return all users;
-	console.log(ctx.req.param().authorId, 'authorId crcta ?');
 	const [authorInfo] = await getAuthorInfo(ctx, ctx.req.param().authorId);
 	return ctx.json(authorInfo);
 });
 
-dashboardRoute.get('/author/reviewed-pr/:authorId', async (ctx) => {
-	// return all users;
+dashboardRoute.get('/author/reviewedpr/list/:authorId', async (ctx) => {
 	const reviewedPrList = await getAuthorReviewedPrs(ctx, ctx.req.param().authorId);
 	return ctx.json(reviewedPrList);
+});
+
+dashboardRoute.get('/pullrequest/reviwers/list/:prId', async (ctx) => {
+	console.log(ctx.req.param().prId, 'ctx.req.param().prId');
+	const reviewersList = await getPrReviewersList(ctx, ctx.req.param().prId);
+	return ctx.json(reviewersList);
 });
 
 dashboardRoute.get('/author/stats/:authorId', async (ctx) => {

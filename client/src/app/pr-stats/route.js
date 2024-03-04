@@ -66,7 +66,7 @@ export async function getAuthorPrInfoApi(id) {
 
 export async function getReviewedPrsListApi(id) {
 	const res = await fetch(
-		`${PR_STATS_DOMAIN_URL}/pr-stats/api/author/reviewed-pr/${id}`,
+		`${PR_STATS_DOMAIN_URL}/pr-stats/api/author/reviewedpr/list/${id}`,
 		{
 			headers: {
 				"Content-Type": "application/json",
