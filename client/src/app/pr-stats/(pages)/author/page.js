@@ -22,10 +22,10 @@ export default function Page() {
 	}
 	return (
 		<div className="flex flex-col h-screen">
-			<div className="grow-0 p-2 shrink-0 basis-12 border-b-2 border-slate-300 bg-white">
+			<div className="grow-0 p-2 shrink-0 basis-12 border-b  bg-white">
 				<Toolbar onFilter={onFilterChange} onSearch={onSearchChange} />
 			</div>
-			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b-2 border-slate-300 bg-slate-100	">
+			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b  bg-slate-200	">
 				<Table onRowClick={onRowClick} authorList={AUTHORS_LIST} />
 			</div>
 			<div className="grow-0 p-2 shrink-0 basis-20 bg-white">

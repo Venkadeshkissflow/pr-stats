@@ -38,12 +38,12 @@ function PrInfoCard({ prTitle, prLink, commentsCount, timeToReview = 0 }) {
 				borderRadius="Roundness"
 			/>
 			<div className="flex flex-col grow shrink basis-auto">
-				<span className="text-slate-700 hover:text-blue-400	font-semibold text-base	cursor-default	cursor-pointer">
+				<span className="text-slate-700 hover:text-blue-400	font-semibold text-base	cursor-default	cursor-pointer w-fit">
 					{prTitle}
 				</span>
 				{/* <span>{prLink}</span> */}
 				<div className="flex gap-4">
-					<span className="text-slate-500	text-sm	cursor-default	">
+					<span className="text-slate-500	text-sm	cursor-default ">
 						Comments count: {commentsCount}
 					</span>
 					<span className="text-slate-500	text-sm	cursor-default	">

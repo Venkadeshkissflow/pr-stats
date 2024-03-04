@@ -6,6 +6,7 @@ import { getFormattedDate } from "../../util";
 import { convertMsToTime } from "../../util";
 import { Card } from "@tremor/react";
 import { ChartComponent } from "../../(components)/chart";
+import { TitleBar } from "../../(components)/";
 
 const timeFormatted = (timeInMS) => `${convertMsToTime(timeInMS)}`;
 
@@ -20,8 +21,8 @@ export function ReviewTimeChartWrapper({ reviewers }) {
 	);
 
 	return (
-		<Card className="rounded">
-			<div className="border-b-2">Review time</div>
+		<Card className="rounded p-0">
+			<TitleBar title={"Review time"} />
 			<ChartComponent
 				data={reviewTimeFormattedData}
 				index={"submittedAt"}

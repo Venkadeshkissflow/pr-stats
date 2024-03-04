@@ -9,29 +9,29 @@ export function Table({ authorList, onRowClick }) {
 				<div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
 					<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 						<table className="min-w-full divide-y divide-gray-200">
-							<thead className="bg-gray-50">
+							<thead className="bg-slate-500">
 								<tr>
 									<th
 										scope="col"
-										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider"
 									>
 										Name
 									</th>
 									<th
 										scope="col"
-										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider"
 									>
 										Total comments
 									</th>
 									<th
 										scope="col"
-										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider"
 									>
 										Total Reviews
 									</th>
 									<th
 										scope="col"
-										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider"
 									>
 										Total review time
 									</th>

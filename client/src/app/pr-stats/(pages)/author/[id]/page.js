@@ -8,7 +8,7 @@ import { Card } from "@tremor/react";
 import { ChartComponent } from "@/app/pr-stats/(components)/chart";
 import { getFormattedDate } from "@/app/pr-stats/util";
 import { ReviewTimeChartWrapper } from "../reviewtimechartwrapper";
-import { ReviewedPrsList } from "@/app/pr-stats/(components)/";
+import { ReviewedPrsList, TitleBar } from "@/app/pr-stats/(components)/";
 
 export default async function AuthorInfo({ params }) {
 	console.log(params, "params me");
@@ -30,8 +30,8 @@ export default async function AuthorInfo({ params }) {
 
 	return (
 		<div className="p-4 flex flex-col gap-y-4 overflow-scroll">
-			<Card className="rounded">
-				<div className="border-b-2">Comments count</div>
+			<Card className="p-0">
+				<TitleBar title={"Comments count"} />
 				<ChartComponent
 					data={commentsCountFormattedData}
 					index={"submittedAt"}

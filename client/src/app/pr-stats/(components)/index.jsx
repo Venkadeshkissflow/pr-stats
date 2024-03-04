@@ -5,3 +5,5 @@ export { Table } from "./table";
 export { Toolbar } from "./toolbar";
 export { HeaderComponent } from "./header";
 export { ReviewedPrsList } from "./reviewedPrList";
+export { TitleBar } from "./titlebar";
+export { Divider } from "./divider";
