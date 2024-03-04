@@ -9,7 +9,10 @@ import { Icon } from "@tremor/react";
 
 import { RiGitPullRequestFill, RiArrowDownSFill } from "@remixicon/react";
 
+import { AUTHORS_LIST } from "../(pages)/author/MOCK";
+
 import styles from "./styles.module.css";
+// import { getPrReviewersListApi } from "../route";
 
 export function ReviewedPrsList({ reviewers }) {
 	return (
@@ -17,26 +20,33 @@ export function ReviewedPrsList({ reviewers }) {
 			<div className="m-4 text-slate-800">Reviewed pull requests list</div>
 			<span className="block h-px bg-slate-200" />
 			<div className="m-4 flex flex-col gap-4">
-				{reviewers.map(
-					({ pullRequestId: prTitle, commentsCount, timeToReview }) => (
-						<PrInfoCard
-							prTitle={prTitle}
-							prLink={prTitle}
-							commentsCount={commentsCount}
-							totalReviewTime={timeToReview}
-						/>
-					)
-				)}
+				{reviewers.map(({ pullRequestId, commentsCount, timeToReview }) => (
+					<PrInfoCard
+						key={pullRequestId}
+						id={pullRequestId}
+						prTitle={pullRequestId}
+						commentsCount={commentsCount}
+						totalReviewTime={timeToReview}
+					/>
+				))}
 			</div>
 		</Card>
 	);
 }
 
-function PrInfoCard({ prTitle, prLink, commentsCount, timeToReview = 0 }) {
+function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 	const [showReviewersList, setShowReviewersList] = useState(false);
+	// const [pullRequestId, setPullRequestId] = useState("");
+	const [reviewers, setRewievers] = useState(AUTHORS_LIST);
 
-	function showAndHideReviewers() {
+	async function showAndHideReviewers(id) {
 		setShowReviewersList((prevState) => !prevState);
+		// setPullRequestId(id);
+		// console.log(id);
+		// await getPrReviewersListApi(id).then((response) => {
+		// 	console.log(response);
+		// });
+		setRewievers(AUTHORS_LIST);
 	}
 
 	return (
@@ -79,20 +89,33 @@ function PrInfoCard({ prTitle, prLink, commentsCount, timeToReview = 0 }) {
 					variant="light"
 					icon={RiArrowDownSFill}
 					iconPosition={"right"}
-					onClick={() => showAndHideReviewers()}
+					onClick={() => showAndHideReviewers(id)}
 				>
 					View reviewers
 				</Button>
 			</Card>
 			<Card
-				className={`p-0 ${styles.reviewersList} ${
+				className={`p-0 bg-slate-100 ${styles.reviewersList} ${
 					showReviewersList
 						? styles.showReviewersList
 						: styles.hideReviewersList
 				}`}
 			>
-				Welcome
+				{reviewers.map(({ name, avatarUrl }) => (
+					<ReviewerCard name={name} avatarUrl={avatarUrl} />
+				))}
 			</Card>
 		</div>
+	);
+}
+
+function ReviewerCard({ avatarUrl, name }) {
+	return (
+		<Card className="p-1 flex gap-2 items-center w-36 h-fit">
+			<span>
+				<img className="h-5 w-5 rounded" src={avatarUrl} alt="" />
+			</span>
+			<span className="text-xs	">{name}</span>
+		</Card>
 	);
 }

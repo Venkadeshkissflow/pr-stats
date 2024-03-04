@@ -1,14 +1,23 @@
 .reviewersList {
     top: -10px;
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: repeat(auto-fill,repeat(3,1fr));
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(160px,1fr);
+    overflow-x: auto;
+    grid-template-rows: repeat(3,1fr);
 }
 
 .showReviewersList {
     height: 150px;
-    transition: height 0.3s;
+    transition: all 0.3s;
+    padding: 16px;
 }
 
 .hideReviewersList {
     height: 0px;
-    transition: height 0.3s;
+    transition: all 0.3s;
     overflow: hidden;
+    padding: 0px;
 }

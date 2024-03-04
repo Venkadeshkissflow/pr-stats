@@ -81,6 +81,23 @@ export async function getReviewedPrsListApi(id) {
 	return res.json();
 }
 
+export async function getPrReviewersListApi(prId) {
+	const res = await fetch(
+		`${PR_STATS_DOMAIN_URL}/pr-stats/api/pullrequest/reviwers/list/${prId}`,
+		{
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}
+	);
+
+	if (!res.ok) {
+		throw new Error("Failed to fetch reviewd prs list");
+	}
+
+	return res.json();
+}
+
 export async function getAuthorList() {
 	const res = await fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/author`, {
 		headers: {
