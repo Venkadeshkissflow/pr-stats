@@ -6,8 +6,13 @@ import { Button } from "@tremor/react";
 
 import { Card } from "@tremor/react";
 import { Icon } from "@tremor/react";
+import { useRouter } from "next/navigation";
 
-import { RiGitPullRequestFill, RiArrowDownSFill } from "@remixicon/react";
+import {
+	RiGitPullRequestFill,
+	RiArrowDownSFill,
+	RiArrowUpSFill,
+} from "@remixicon/react";
 
 import { AUTHORS_LIST } from "../(pages)/author/MOCK";
 
@@ -42,7 +47,7 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 	async function showAndHideReviewers(id) {
 		setShowReviewersList((prevState) => !prevState);
 		// setPullRequestId(id);
-		// console.log(id);
+		console.log(id);
 		// await getPrReviewersListApi(id).then((response) => {
 		// 	console.log(response);
 		// });
@@ -51,7 +56,10 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 
 	return (
 		<div>
-			<Card className="flex p-4 items-center gap-4 z-10">
+			<Card
+				onClick={() => showAndHideReviewers(id)}
+				className="flex p-4 items-center gap-4 z-10"
+			>
 				<Icon
 					icon={RiGitPullRequestFill}
 					variant="simple"
@@ -87,9 +95,8 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 				<Button
 					className="h-fit flex items-center"
 					variant="light"
-					icon={RiArrowDownSFill}
+					icon={showReviewersList ? RiArrowUpSFill : RiArrowDownSFill}
 					iconPosition={"right"}
-					onClick={() => showAndHideReviewers(id)}
 				>
 					View reviewers
 				</Button>
@@ -101,21 +108,30 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 						: styles.hideReviewersList
 				}`}
 			>
-				{reviewers.map(({ name, avatarUrl }) => (
-					<ReviewerCard name={name} avatarUrl={avatarUrl} />
+				{reviewers.map(({ id, name, avatarUrl }) => (
+					<ReviewerCard key={id} id={id} name={name} avatarUrl={avatarUrl} />
 				))}
 			</Card>
 		</div>
 	);
 }
 
-function ReviewerCard({ avatarUrl, name }) {
+function ReviewerCard({ avatarUrl, name, id }) {
+	const router = useRouter();
+
+	function updateAuthorPage(id) {
+		router.push(`/pr-stats/author/${id}`);
+	}
+
 	return (
-		<Card className="p-1 flex gap-2 items-center w-36 h-fit">
+		<Card
+			onClick={() => updateAuthorPage(id)}
+			className="p-1 flex gap-2 items-center w-36 h-fit cursor-pointer"
+		>
 			<span>
 				<img className="h-5 w-5 rounded" src={avatarUrl} alt="" />
 			</span>
-			<span className="text-xs	">{name}</span>
+			<span className="text-xs">{name}</span>
 		</Card>
 	);
 }

@@ -21,3 +21,7 @@
     overflow: hidden;
     padding: 0px;
 }
+
+.backIcon {
+    border-radius: 50%;
+}
