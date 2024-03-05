@@ -1,3 +1,10 @@
+const TIME_PERIOD = {
+	LAST_3_MONTHS: 'last-3-months',
+	LAST_6_MONTHS: 'last-6-months',
+	THIS_YEAR: 'this-year',
+	LAST_YEAR: 'last-year',
+};
+
 export async function addReviews(ctx, review) {
 	let { author, reviews } = review;
 	const stmt = ctx.env.DB.prepare(`INSERT OR IGNORE INTO review(id, authorId, pullRequestId, commentsCount, timeToReview, submittedAt) 
@@ -23,16 +30,16 @@ export async function getDasboardForAuthor(ctx, filter = {}) {
 		condition.push(`authorId=?1`);
 	}
 	switch (filter.startDate) {
-		case 'last 3 months':
+		case TIME_PERIOD.LAST_3_MONTHS:
 			condition.push(`submittedAt > date("now", "-3 months")`);
 			break;
-		case 'last 6 months':
+		case TIME_PERIOD.LAST_6_MONTHS:
 			condition.push(`submittedAt > date("now", "-6 months")`);
 			break;
-		case 'this year':
+		case TIME_PERIOD.THIS_YEAR:
 			condition.push(`submittedAt > date("now", "start of year")`);
 			break;
-		case 'last year':
+		case THIS_YEAR.LAST_YEAR:
 			condition.push(`submittedAt > date("now", "-1 years")`);
 			break;
 	}

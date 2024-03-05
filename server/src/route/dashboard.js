@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 const dashboardRoute = new Hono();
 
-import { getAuthorList, getAuthorInfo, getAuthorReviewedPrs, getPrReviewersList } from '../service/author.js';
+import { getAuthorList, getAuthorInfo, getAuthorReviewedPrList, getPrReviewersList } from '../service/author.js';
 import { getDasboardForAuthor } from '../service/review.js';
 
 dashboardRoute.get('/author', async (ctx) => {
@@ -15,7 +15,7 @@ dashboardRoute.get('/author/:authorId', async (ctx) => {
 });
 
 dashboardRoute.get('/author/reviewedpr/list/:authorId', async (ctx) => {
-	const reviewedPrList = await getAuthorReviewedPrs(ctx, ctx.req.param().authorId);
+	const reviewedPrList = await getAuthorReviewedPrList(ctx, ctx.req.param().authorId);
 	return ctx.json(reviewedPrList);
 });
 
@@ -28,6 +28,7 @@ dashboardRoute.get('/pullrequest/reviwers/list/:prId', async (ctx) => {
 dashboardRoute.get('/author/stats/:authorId', async (ctx) => {
 	// return all dashboard metric for given user;
 	const searchParams = ctx.req.query();
+	console.log(searchParams, 'query filterparam');
 	console.log(' serach params ', JSON.stringify(searchParams));
 	const reviewList = await getDasboardForAuthor(ctx, { authorId: ctx.req.param().authorId, ...searchParams });
 	return ctx.json({

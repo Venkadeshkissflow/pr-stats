@@ -1,20 +1,33 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { InfoCard, Table, Toolbar } from "../../(components)/index";
 
 import { AUTHORS_LIST } from "./MOCK";
+import { TIME_PERIOD } from "@/app/constant";
 
 export default function Page() {
 	const router = useRouter();
 
-	function onFilterChange(event) {
-		console.log(event, "filter chaneg");
+	const [filterParam, setFilterParam] = useState(TIME_PERIOD.DEFAULT);
+	const [authorList, setAuthorList] = useState(AUTHORS_LIST);
+
+	function onFilterChange(timePeriod) {
+		console.log(timePeriod, "filter chaneg");
+		setFilterParam(timePeriod);
 	}
-	function onSearchChange(event) {
-		console.log(event, "searchValue");
+	function onSearchChange(searchValue) {
+		if (searchValue === "") {
+			setAuthorList(AUTHORS_LIST);
+		} else {
+			let filteredAuthorList = authorList.filter((author) => {
+				return author.name.toLowerCase().includes(searchValue.toLowerCase());
+			});
+			setAuthorList(filteredAuthorList);
+		}
+		console.log(searchValue, "searchValue");
 	}
 	function onRowClick(author) {
 		console.log(author, "author info");
@@ -26,7 +39,7 @@ export default function Page() {
 				<Toolbar onFilter={onFilterChange} onSearch={onSearchChange} />
 			</div>
 			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b  bg-slate-200	">
-				<Table onRowClick={onRowClick} authorList={AUTHORS_LIST} />
+				<Table onRowClick={onRowClick} authorList={authorList} />
 			</div>
 			<div className="grow-0 p-2 shrink-0 basis-20 bg-white">
 				<InfoCard />

@@ -27,7 +27,7 @@ export async function getAuthorInfo(ctx, id) {
 	return results;
 }
 
-export async function getAuthorReviewedPrs(ctx, id) {
+export async function getAuthorReviewedPrList(ctx, id) {
 	const { results } = await ctx.env.DB.prepare('SELECT * FROM review WHERE authorId = ?1').bind(id).all();
 	return results;
 }
