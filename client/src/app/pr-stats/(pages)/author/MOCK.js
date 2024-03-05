@@ -1,5 +1,6 @@
 export const AUTHORS_LIST = [
 	{
+		unique_id: 1,
 		id: "saravanan10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manuelmhtr",
@@ -9,6 +10,7 @@ export const AUTHORS_LIST = [
 		totalComments: 4,
 	},
 	{
+		unique_id: 2,
 		id: "saravanadn10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manduelmhtr",
@@ -18,6 +20,7 @@ export const AUTHORS_LIST = [
 		totalComments: 5,
 	},
 	{
+		unique_id: 3,
 		id: "10221219.0",
 		name: "saravanan10393",
 		profileUrl: "https://github.com/saravanan10393",
@@ -28,6 +31,7 @@ export const AUTHORS_LIST = [
 		totalComments: 6,
 	},
 	{
+		unique_id: 4,
 		id: "venky0328",
 		name: "VenkadeshS",
 		profileUrl: "https://github.com/Venkadeshkissflow",
@@ -38,6 +42,7 @@ export const AUTHORS_LIST = [
 	},
 	//
 	{
+		unique_id: 5,
 		id: "saravanan10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manuelmhtr",
@@ -47,6 +52,7 @@ export const AUTHORS_LIST = [
 		totalComments: 4,
 	},
 	{
+		unique_id: 6,
 		id: "saravanadn10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manduelmhtr",
@@ -56,6 +62,7 @@ export const AUTHORS_LIST = [
 		totalComments: 5,
 	},
 	{
+		unique_id: 7,
 		id: "10221219.0",
 		name: "saravanan10393",
 		profileUrl: "https://github.com/saravanan10393",
@@ -66,6 +73,7 @@ export const AUTHORS_LIST = [
 		totalComments: 6,
 	},
 	{
+		unique_id: 8,
 		id: "venky0328",
 		name: "VenkadeshS",
 		profileUrl: "https://github.com/Venkadeshkissflow",
@@ -76,6 +84,7 @@ export const AUTHORS_LIST = [
 	},
 	//
 	{
+		unique_id: 9,
 		id: "saravanan10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manuelmhtr",
@@ -85,6 +94,7 @@ export const AUTHORS_LIST = [
 		totalComments: 4,
 	},
 	{
+		unique_id: 10,
 		id: "saravanadn10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manduelmhtr",
@@ -94,6 +104,7 @@ export const AUTHORS_LIST = [
 		totalComments: 5,
 	},
 	{
+		unique_id: 11,
 		id: "10221219.0",
 		name: "saravanan10393",
 		profileUrl: "https://github.com/saravanan10393",
@@ -104,6 +115,7 @@ export const AUTHORS_LIST = [
 		totalComments: 6,
 	},
 	{
+		unique_id: 12,
 		id: "venky0328",
 		name: "VenkadeshS",
 		profileUrl: "https://github.com/Venkadeshkissflow",

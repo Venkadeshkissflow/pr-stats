@@ -22,10 +22,11 @@ export default function Page() {
 		if (searchValue === "") {
 			setAuthorList(AUTHORS_LIST);
 		} else {
-			let filteredAuthorList = authorList.filter((author) => {
+			let filteredAuthorList = AUTHORS_LIST.filter((author) => {
 				return author.name.toLowerCase().includes(searchValue.toLowerCase());
 			});
 			setAuthorList(filteredAuthorList);
+			console.log(filteredAuthorList, "filteredAuthorList");
 		}
 		console.log(searchValue, "searchValue");
 	}
