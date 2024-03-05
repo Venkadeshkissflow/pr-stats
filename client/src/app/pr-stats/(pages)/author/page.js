@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { InfoCard, Table, Toolbar } from "../../(components)/index";
+import { InfoCard, TableComponent, Toolbar } from "../../(components)/index";
 
 import { AUTHORS_LIST } from "./MOCK";
 import { TIME_PERIOD } from "@/app/constant";
@@ -39,8 +39,8 @@ export default function Page() {
 			<div className="grow-0 p-2 shrink-0 basis-12 border-b  bg-white">
 				<Toolbar onFilter={onFilterChange} onSearch={onSearchChange} />
 			</div>
-			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b  bg-slate-200	">
-				<Table onRowClick={onRowClick} authorList={authorList} />
+			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b  bg-slate-200	h-full">
+				<TableComponent onRowClick={onRowClick} authorList={authorList} />
 			</div>
 			<div className="grow-0 p-2 shrink-0 basis-20 bg-white">
 				<InfoCard />
