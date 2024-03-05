@@ -8,7 +8,7 @@ import { Icon } from "@tremor/react";
 
 import styles from "./styles.module.css";
 
-export function HeaderComponent({ title, avatarUrl }) {
+export function HeaderComponent({ title, avatarUrl, profileUrl }) {
 	const router = useRouter();
 
 	function getBackToDashboard() {
@@ -29,7 +29,16 @@ export function HeaderComponent({ title, avatarUrl }) {
 			<div className="rounded-full h-10 w-10 border-2">
 				<img className="h-full w-full rounded-full" src={avatarUrl} alt="" />
 			</div>
-			<span className="text-gray-500">{title}</span>
+			<div className="flex flex-col">
+				<span className="text-gray-500">{title}</span>
+				<a
+					href={profileUrl}
+					target="_blank"
+					className="text-blue-500 text-sm underline hover:text-blue-700 "
+				>
+					{profileUrl}
+				</a>
+			</div>
 		</div>
 	);
 }

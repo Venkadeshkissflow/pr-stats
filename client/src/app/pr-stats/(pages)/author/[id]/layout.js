@@ -7,13 +7,17 @@ export default async function AuthorInfoLayout({ children, params }) {
 	console.log(params, "params");
 	const authorInfo = await getAuthorInfo(params.id);
 
-	const { name, avatarUrl } = authorInfo;
+	const { name, avatarUrl, profileUrl } = authorInfo;
 
 	console.log(authorInfo, "params authorInfo");
 
 	return (
 		<div className="flex flex-col h-screen">
-			<HeaderComponent title={name} avatarUrl={avatarUrl} />
+			<HeaderComponent
+				title={name}
+				avatarUrl={avatarUrl}
+				profileUrl={profileUrl}
+			/>
 			{children}
 		</div>
 	);

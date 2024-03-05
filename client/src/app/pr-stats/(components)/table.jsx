@@ -39,7 +39,11 @@ export function Table({ authorList, onRowClick }) {
 							</thead>
 							<tbody className="bg-white divide-y divide-gray-200">
 								{authorList.map((person) => (
-									<tr key={person.id} onClick={() => onRowClick(person)}>
+									<tr
+										className="cursor-pointer hover:bg-slate-100"
+										key={person.id}
+										onClick={() => onRowClick(person)}
+									>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="flex items-center">
 												<div className="flex-shrink-0 h-10 w-10">

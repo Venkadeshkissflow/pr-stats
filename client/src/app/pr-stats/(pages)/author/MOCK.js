@@ -38,7 +38,7 @@ export const AUTHORS_LIST = [
 	},
 	//
 	{
-		id: "saravanan103931",
+		id: "saravanan10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manuelmhtr",
 		avatarUrl: "https://avatars.githubusercontent.com/u/saravanan10393",
@@ -47,7 +47,7 @@ export const AUTHORS_LIST = [
 		totalComments: 4,
 	},
 	{
-		id: "saravanadn103931",
+		id: "saravanadn10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manduelmhtr",
 		avatarUrl: "https://avatars.githubusercontent.com/u/saravdanan10393",
@@ -56,7 +56,7 @@ export const AUTHORS_LIST = [
 		totalComments: 5,
 	},
 	{
-		id: "10221219.01",
+		id: "10221219.0",
 		name: "saravanan10393",
 		profileUrl: "https://github.com/saravanan10393",
 		avatarUrl:
@@ -66,7 +66,7 @@ export const AUTHORS_LIST = [
 		totalComments: 6,
 	},
 	{
-		id: "venky03281",
+		id: "venky0328",
 		name: "VenkadeshS",
 		profileUrl: "https://github.com/Venkadeshkissflow",
 		avatarUrl: "https://avatars.githubusercontent.com/u/Venkadeshkissflow",
@@ -76,7 +76,7 @@ export const AUTHORS_LIST = [
 	},
 	//
 	{
-		id: "saravanan103932",
+		id: "saravanan10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manuelmhtr",
 		avatarUrl: "https://avatars.githubusercontent.com/u/saravanan10393",
@@ -85,7 +85,7 @@ export const AUTHORS_LIST = [
 		totalComments: 4,
 	},
 	{
-		id: "saravanadn103932",
+		id: "saravanadn10393",
 		name: "manuelmhtr",
 		profileUrl: "https://github.com/manduelmhtr",
 		avatarUrl: "https://avatars.githubusercontent.com/u/saravdanan10393",
@@ -94,7 +94,7 @@ export const AUTHORS_LIST = [
 		totalComments: 5,
 	},
 	{
-		id: "10221219.02",
+		id: "10221219.0",
 		name: "saravanan10393",
 		profileUrl: "https://github.com/saravanan10393",
 		avatarUrl:
@@ -104,7 +104,7 @@ export const AUTHORS_LIST = [
 		totalComments: 6,
 	},
 	{
-		id: "venky03282",
+		id: "venky0328",
 		name: "VenkadeshS",
 		profileUrl: "https://github.com/Venkadeshkissflow",
 		avatarUrl: "https://avatars.githubusercontent.com/u/Venkadeshkissflow",
