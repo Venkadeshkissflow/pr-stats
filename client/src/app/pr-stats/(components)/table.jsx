@@ -22,6 +22,20 @@ export function TableComponent({ authorList, onRowClick }) {
 		console.log("demo");
 	}
 
+	if (authorList.length === 0) {
+		return (
+			<div className="h-full w-full bg-white flex flex-col items-center justify-center">
+				<Icon
+					icon={RiSearchEyeLine}
+					variant="simple"
+					size="xl"
+					borderRadius="Roundness"
+				/>
+				No data found
+			</div>
+		);
+	}
+
 	return (
 		<Table className="w-full rounded">
 			<TableHead className="bg-slate-500">
@@ -74,7 +88,7 @@ export function TableComponent({ authorList, onRowClick }) {
 							<span
 								onClick={(e) => e.stopPropagation()}
 								className="px-2 inline-flex text-xs leading-5
-							  font-semibold rounded-full bg-green-100 text-green-800"
+				  font-semibold rounded-full bg-green-100 text-green-800"
 							>
 								{convertMsToTime(person.timeToReview)}
 							</span>
