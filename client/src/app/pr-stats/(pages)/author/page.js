@@ -14,10 +14,33 @@ export default function Page() {
 	const [filterParam, setFilterParam] = useState(TIME_PERIOD.DEFAULT);
 	const [authorList, setAuthorList] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [totalAuthorInfo, setTotalAuthorInfo] = useState({
+		totalContributors: 0,
+		commentsCount: 0,
+		reviewedPrsCount: 0,
+		totalReviewTime: 0,
+	});
+
+	function filterAuthorInfo(authorList, keyToFilter) {
+		return authorList.reduce((acc, currentValue) => {
+			return acc + currentValue[keyToFilter];
+		}, 0);
+	}
 
 	async function getContributorsList() {
 		await getAuthorList()
-			.then((res) => setAuthorList(res))
+			.then((res) => {
+				setAuthorList(res);
+				let totalCommentsCount = filterAuthorInfo(res, "totalComments");
+				let totalReviewedPrs = filterAuthorInfo(res, "totalReviews");
+				let totalReviewTime = filterAuthorInfo(res, "timeToReview");
+				setTotalAuthorInfo({
+					totalContributors: res.length,
+					commentsCount: totalCommentsCount,
+					reviewedPrsCount: totalReviewedPrs,
+					totalReviewTime: totalReviewTime,
+				});
+			})
 			.catch((errRes) => console.log(errRes, "Error response"))
 			.finally(() => setLoading(false));
 	}
@@ -59,7 +82,7 @@ export default function Page() {
 				/>
 			</div>
 			<div className="grow-0 p-2 shrink-0 basis-20 bg-white">
-				<InfoCard />
+				<InfoCard {...totalAuthorInfo} />
 			</div>
 		</div>
 	);

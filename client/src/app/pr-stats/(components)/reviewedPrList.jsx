@@ -7,15 +7,15 @@ import { Button } from "@tremor/react";
 import { Card } from "@tremor/react";
 import { Icon } from "@tremor/react";
 import { useRouter } from "next/navigation";
-
 import {
 	RiGitPullRequestFill,
 	RiArrowDownSFill,
 	RiArrowUpSFill,
 } from "@remixicon/react";
 
-import styles from "./styles.module.css";
 import { getPrReviewersListApi } from "../route";
+
+import styles from "./styles.module.css";
 
 export function ReviewedPrsList({ reviewers }) {
 	return (
