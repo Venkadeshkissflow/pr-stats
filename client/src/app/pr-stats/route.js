@@ -82,34 +82,16 @@ export async function getReviewedPrsListApi(id) {
 }
 
 export async function getPrReviewersListApi(prId) {
-	const res = await fetch(
+	return fetch(
 		`${PR_STATS_DOMAIN_URL}/pr-stats/api/pullrequest/reviwers/list/${prId}`,
 		{
-			headers: {
-				"Content-Type": "application/json",
-			},
+			method: "GET",
 		}
-	);
-
-	if (!res.ok) {
-		throw new Error("Failed to fetch reviewd prs list");
-	}
-
-	return res.json();
+	).then((res) => res.json());
 }
 
-export async function getAuthorList() {
-	const res = await fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/author`, {
-		headers: {
-			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
-			"Access-Control-Max-Age": "86400",
-		},
-	});
-
-	if (!res.ok) {
-		throw new Error("Failed to fetch reviewerInfo");
-	}
-
-	return res.json();
+export function getAuthorList(queryParam) {
+	return fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/author?${queryParam}`, {
+		method: "GET",
+	}).then((res) => res.json());
 }

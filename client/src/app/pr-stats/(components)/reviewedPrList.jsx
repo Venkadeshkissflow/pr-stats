@@ -14,10 +14,8 @@ import {
 	RiArrowUpSFill,
 } from "@remixicon/react";
 
-import { AUTHORS_LIST } from "../(pages)/author/MOCK";
-
 import styles from "./styles.module.css";
-// import { getPrReviewersListApi } from "../route";
+import { getPrReviewersListApi } from "../route";
 
 export function ReviewedPrsList({ reviewers }) {
 	return (
@@ -41,17 +39,16 @@ export function ReviewedPrsList({ reviewers }) {
 
 function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 	const [showReviewersList, setShowReviewersList] = useState(false);
-	// const [pullRequestId, setPullRequestId] = useState("");
-	const [reviewers, setRewievers] = useState(AUTHORS_LIST);
+	const [reviewers, setRewievers] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	async function showAndHideReviewers(id) {
 		setShowReviewersList((prevState) => !prevState);
-		// setPullRequestId(id);
 		console.log(id);
-		// await getPrReviewersListApi(id).then((response) => {
-		// 	console.log(response);
-		// });
-		setRewievers(AUTHORS_LIST);
+		await getPrReviewersListApi(id)
+			.then((res) => setRewievers(res))
+			.catch((errRes) => console.log(errRes, "Error response"))
+			.finally(() => setIsLoading(false));
 	}
 
 	return (
@@ -80,18 +77,6 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 						</span>
 					</div>
 				</div>
-				{/* <Card className="grow-0 p-0 shrink-0 basis-40 flex flex-col items-center ">
-				<span className="w-full m-2 flex items-center justify-center border-b-2">
-					Comments count
-				</span>
-				<span>{commentsCount}</span>
-			</Card>
-			<Card className="grow-0 p-0 shrink-0 basis-40 flex flex-col items-center ">
-				<span className="w-full m-2 flex items-center justify-center border-b-2">
-					Total reviewed time
-				</span>
-				<span>{timeToReview}</span>
-			</Card> */}
 				<Button
 					className="h-fit flex items-center"
 					variant="light"
@@ -108,9 +93,20 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 						: styles.hideReviewersList
 				}`}
 			>
-				{reviewers.map(({ id, name, avatarUrl }) => (
-					<ReviewerCard key={id} id={id} name={name} avatarUrl={avatarUrl} />
-				))}
+				{isLoading ? (
+					<div>loading.....</div>
+				) : (
+					<>
+						{reviewers.map(({ id, name, avatarUrl }) => (
+							<ReviewerCard
+								key={id}
+								id={id}
+								name={name}
+								avatarUrl={avatarUrl}
+							/>
+						))}
+					</>
+				)}
 			</Card>
 		</div>
 	);

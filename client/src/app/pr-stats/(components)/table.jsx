@@ -15,11 +15,9 @@ import {
 
 import styles from "./styles.module.css";
 
-export function TableComponent({ authorList, onRowClick }) {
-	console.log(authorList, "authorList");
-
-	function onRowCheck() {
-		console.log("demo");
+export function TableComponent({ isLoading, authorList, onRowClick }) {
+	if (isLoading) {
+		return <span>loading......</span>;
 	}
 
 	if (authorList.length === 0) {

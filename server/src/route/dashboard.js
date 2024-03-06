@@ -28,7 +28,6 @@ dashboardRoute.get('/pullrequest/reviwers/list/:prId', async (ctx) => {
 dashboardRoute.get('/author/stats/:authorId', async (ctx) => {
 	// return all dashboard metric for given user;
 	const searchParams = ctx.req.query();
-	console.log(searchParams, 'query filterparam');
 	console.log(' serach params ', JSON.stringify(searchParams));
 	const reviewList = await getDasboardForAuthor(ctx, { authorId: ctx.req.param().authorId, ...searchParams });
 	return ctx.json({

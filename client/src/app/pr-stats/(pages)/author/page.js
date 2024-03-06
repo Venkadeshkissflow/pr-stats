@@ -1,18 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { InfoCard, TableComponent, Toolbar } from "../../(components)/index";
-
 import { AUTHORS_LIST } from "./MOCK";
 import { TIME_PERIOD } from "@/app/constant";
+import { getAuthorList } from "../../route";
 
 export default function Page() {
 	const router = useRouter();
 
 	const [filterParam, setFilterParam] = useState(TIME_PERIOD.DEFAULT);
-	const [authorList, setAuthorList] = useState(AUTHORS_LIST);
+	const [authorList, setAuthorList] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	async function getContributorsList() {
+		await getAuthorList()
+			.then((res) => setAuthorList(res))
+			.catch((errRes) => console.log(errRes, "Error response"))
+			.finally(() => setLoading(false));
+	}
+
+	useEffect(function onLoad() {
+		getContributorsList();
+	}, []);
 
 	function onFilterChange(timePeriod) {
 		console.log(timePeriod, "filter chaneg");
@@ -40,7 +52,11 @@ export default function Page() {
 				<Toolbar onFilter={onFilterChange} onSearch={onSearchChange} />
 			</div>
 			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b  bg-slate-200	h-full">
-				<TableComponent onRowClick={onRowClick} authorList={authorList} />
+				<TableComponent
+					onRowClick={onRowClick}
+					isLoading={loading}
+					authorList={authorList}
+				/>
 			</div>
 			<div className="grow-0 p-2 shrink-0 basis-20 bg-white">
 				<InfoCard />
