@@ -22,7 +22,7 @@ export function InfoCard({
 				<span className="font-medium">{commentsCount}</span>
 			</div>
 			<div className="flex-1 p-2 flex items-center flex-col border-r">
-				<p className="text-slate-800 font-bold">Total Reviews</p>
+				<p className="text-slate-800 font-bold">Total Reviewed prs</p>
 				<span className="font-medium">{reviewedPrsCount}</span>
 			</div>
 			<div className="flex-1 p-2 flex items-center flex-col">

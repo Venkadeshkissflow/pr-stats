@@ -39,13 +39,13 @@ export function TableComponent({ isLoading, authorList, onRowClick }) {
 			<TableHead className="bg-slate-500">
 				<TableRow>
 					<TableHeaderCell className="text-white	">Name</TableHeaderCell>
-					<TableHeaderCell className="text-right text-white">
+					<TableHeaderCell className="text-center text-white">
 						Total comments
 					</TableHeaderCell>
-					<TableHeaderCell className="text-white	">
-						Total Reviews
+					<TableHeaderCell className="text-center text-white	">
+						Total Reviewed prs
 					</TableHeaderCell>
-					<TableHeaderCell className="text-white	">
+					<TableHeaderCell className="text-center text-white	">
 						Total review time
 					</TableHeaderCell>
 				</TableRow>
@@ -82,7 +82,7 @@ export function TableComponent({ isLoading, authorList, onRowClick }) {
 						<TableCell className="text-center text-sm text-gray-500">
 							{person.totalReviews}
 						</TableCell>
-						<TableCell>
+						<TableCell className="text-center">
 							<span
 								onClick={(e) => e.stopPropagation()}
 								className="px-2 inline-flex text-xs leading-5
