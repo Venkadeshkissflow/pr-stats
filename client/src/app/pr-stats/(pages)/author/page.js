@@ -28,6 +28,7 @@ export default function Page() {
 	}
 
 	async function getContributorsList() {
+		setAuthorList(AUTHORS_LIST);
 		await getAuthorList()
 			.then((res) => {
 				setAuthorList(res);

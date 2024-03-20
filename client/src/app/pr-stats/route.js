@@ -90,8 +90,8 @@ export async function getPrReviewersListApi(prId) {
 	).then((res) => res.json());
 }
 
-export function getAuthorList(queryParam) {
-	return fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/author?${queryParam}`, {
+export function getAuthorList(queryParam = "") {
+	return fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/author`, {
 		method: "GET",
 	}).then((res) => res.json());
 }
