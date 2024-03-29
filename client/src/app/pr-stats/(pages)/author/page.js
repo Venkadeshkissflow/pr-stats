@@ -51,7 +51,6 @@ export default function Page() {
 	}, []);
 
 	function onFilterChange(timePeriod) {
-		console.log(timePeriod, "filter chaneg");
 		setFilterParam(timePeriod);
 	}
 	function onSearchChange(searchValue) {
@@ -62,12 +61,9 @@ export default function Page() {
 				return author.name.toLowerCase().includes(searchValue.toLowerCase());
 			});
 			setAuthorList(filteredAuthorList);
-			console.log(filteredAuthorList, "filteredAuthorList");
 		}
-		console.log(searchValue, "searchValue");
 	}
 	function onRowClick(author) {
-		console.log(author, "author info");
 		router.push(`/pr-stats/author/${author.id}`);
 	}
 	return (
