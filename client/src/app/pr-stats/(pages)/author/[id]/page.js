@@ -15,8 +15,6 @@ export default async function AuthorInfo({ params }) {
 	const authorInfo = await getAuthorPrInfoApi(params.id);
 	const reviewedPrsList = await getReviewedPrsListApi(params.id);
 
-	console.log(reviewedPrsList, "reviewedPrsList*****");
-
 	const { reviews: reviewers } = authorInfo;
 
 	const commentsCountFormattedData = reviewers.map(
