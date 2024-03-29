@@ -1,15 +1,25 @@
 import { PR_STATS_DOMAIN_URL, GITHUB_ACTION_DOMAIN_URL } from "@/app/constant";
 
 //Common Repo info dashboard
-export async function getContributors(id) {
-	console.log(id, "params api test find");
-	const res = await fetch(`${GITHUB_ACTION_DOMAIN_URL}/contributors`);
+export async function getContributors() {
+	const res = await fetch(
+		`${GITHUB_ACTION_DOMAIN_URL}/${userName}/${repoName}/contributors`
+	);
 
 	if (!res.ok) {
 		throw new Error("Failed to fetch reviewerInfo");
 	}
 
 	return res.json();
+}
+
+export function getOpenPrList() {
+	return fetch(
+		`${GITHUB_ACTION_DOMAIN_URL}/${userName}/${repoName}/pulls?state=open`,
+		{
+			method: "GET",
+		}
+	).then((res) => res.json());
 }
 
 export async function pullRequestList() {
@@ -22,15 +32,15 @@ export async function pullRequestList() {
 	return res.json();
 }
 
-export async function getCommentsCount() {
-	const res = await fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/commentsCount`);
+// export async function getCommentsCount() {
+// 	const res = await fetch(`${PR_STATS_DOMAIN_URL}/pr-stats/api/commentsCount`);
 
-	if (!res.ok) {
-		throw new Error("Failed to fetch reviewerInfo");
-	}
+// 	if (!res.ok) {
+// 		throw new Error("Failed to fetch reviewerInfo");
+// 	}
 
-	return res.json();
-}
+// 	return res.json();
+// }
 
 // Author info dashboard
 export async function getAuthorInfo(id) {

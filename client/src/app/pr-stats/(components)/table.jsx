@@ -14,15 +14,16 @@ import {
 } from "@tremor/react";
 
 import styles from "./styles.module.css";
+import { Loader } from ".";
 
 export function TableComponent({ isLoading, authorList, onRowClick }) {
 	if (isLoading) {
-		return <span>loading......</span>;
+		return <Loader />;
 	}
 
 	if (authorList.length === 0) {
 		return (
-			<div className="h-full w-full bg-white flex flex-col items-center justify-center">
+			<div className="flex flex-col">
 				<Icon
 					icon={RiSearchEyeLine}
 					variant="simple"
@@ -35,7 +36,7 @@ export function TableComponent({ isLoading, authorList, onRowClick }) {
 	}
 
 	return (
-		<Table className="w-full rounded">
+		<Table className="w-full rounded h-full">
 			<TableHead className="bg-slate-500">
 				<TableRow>
 					<TableHeaderCell className="text-white	">Name</TableHeaderCell>

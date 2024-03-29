@@ -13,7 +13,7 @@ export default function Page() {
 
 	const [filterParam, setFilterParam] = useState(TIME_PERIOD.DEFAULT);
 	const [authorList, setAuthorList] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 	const [totalAuthorInfo, setTotalAuthorInfo] = useState({
 		totalContributors: 0,
 		commentsCount: 0,
@@ -28,7 +28,7 @@ export default function Page() {
 	}
 
 	async function getContributorsList() {
-		setAuthorList(AUTHORS_LIST);
+		setIsLoading(true);
 		await getAuthorList()
 			.then((res) => {
 				setAuthorList(res);
@@ -43,7 +43,7 @@ export default function Page() {
 				});
 			})
 			.catch((errRes) => console.log(errRes, "Error response"))
-			.finally(() => setLoading(false));
+			.finally(() => setIsLoading(false));
 	}
 
 	useEffect(function onLoad() {
@@ -75,15 +75,27 @@ export default function Page() {
 			<div className="grow-0 p-2 shrink-0 basis-12 border-b  bg-white">
 				<Toolbar onFilter={onFilterChange} onSearch={onSearchChange} />
 			</div>
-			<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b  bg-slate-200	h-full">
-				<TableComponent
-					onRowClick={onRowClick}
-					isLoading={loading}
-					authorList={authorList}
-				/>
-			</div>
+			<AuthorsListTable
+				isLoading={isLoading}
+				authorList={authorList}
+				onRowClick={onRowClick}
+			/>
 			<div className="grow-0 p-2 shrink-0 basis-20 bg-white">
 				<InfoCard {...totalAuthorInfo} />
+			</div>
+		</div>
+	);
+}
+
+function AuthorsListTable({ isLoading, authorList, onRowClick }) {
+	return (
+		<div className="grow flex justify-center p-2 shrink basis-auto overflow-scroll border-b  bg-slate-200	h-full">
+			<div className="h-full w-full bg-white flex rounded items-center justify-center">
+				<TableComponent
+					onRowClick={onRowClick}
+					isLoading={isLoading}
+					authorList={authorList}
+				/>
 			</div>
 		</div>
 	);

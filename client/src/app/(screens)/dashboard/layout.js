@@ -12,6 +12,7 @@ import {
 } from "@/app/constant.js";
 
 import styles from "./reviewers.module.css";
+import { Loader } from "@/app/pr-stats/(components)";
 
 const MOCK_LIST = [
 	{
@@ -133,7 +134,7 @@ function ReviewersList({
 }) {
 	const router = useRouter();
 
-	if (isLoading) return <p>Loading...</p>;
+	if (isLoading) return <Loader />;
 	if (reviewersList.length === 0) return <p>No profile data found</p>;
 
 	return reviewersList.map((reviewerInfo) => (

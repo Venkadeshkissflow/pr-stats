@@ -7,3 +7,4 @@ export { HeaderComponent } from "./header";
 export { ReviewedPrsList } from "./reviewedPrList";
 export { TitleBar } from "./titlebar";
 export { Divider } from "./divider";
+export { Loader } from "./loader";

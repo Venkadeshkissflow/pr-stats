@@ -16,6 +16,7 @@ import {
 import { getPrReviewersListApi } from "../route";
 
 import styles from "./styles.module.css";
+import { Loader } from ".";
 
 export function ReviewedPrsList({ reviewers }) {
 	return (
@@ -94,7 +95,9 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 				}`}
 			>
 				{isLoading ? (
-					<div>loading.....</div>
+					<div className="h-full flex items-center justify-center">
+						<Loader />
+					</div>
 				) : (
 					<>
 						{reviewers.map(({ id, name, avatarUrl }) => (
