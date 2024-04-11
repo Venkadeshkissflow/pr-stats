@@ -11,15 +11,15 @@
   "dependencies": {
     "@remixicon/react": "^4.2.0",
     "@tremor/react": "^3.9.2",
-    "next": "13.5.5",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^14.1.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "remixicon-react": "^1.0.0"
   },
   "devDependencies": {
+    "eslint-config-next": "^14.1.4",
     "autoprefixer": "^10",
     "eslint": "^8",
-    "eslint-config-next": "13.5.5",
     "postcss": "^8",
     "tailwindcss": "^3"
   }
