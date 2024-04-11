@@ -4,3 +4,6 @@ pnpm-lock.yaml
 .next
 package-lock.json
 .env
+
+
+*.log
