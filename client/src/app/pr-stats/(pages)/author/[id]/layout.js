@@ -1,22 +1,19 @@
 import React from "react";
 
 import { HeaderComponent } from "@/app/pr-stats/(components)";
-// import { getAuthorInfo } from "@/app/pr-stats/route";
+import { getAuthorInfo } from "@/app/pr-stats/route";
 
 export default async function AuthorInfoLayout({ children, params }) {
-	console.log(params, "params");
-	// const authorInfo = await getAuthorInfo(params.id);
+	const authorInfo = await getAuthorInfo(params.id);
 
-	// const { name, avatarUrl, profileUrl } = authorInfo;
-
-	console.log(authorInfo, "params authorInfo");
+	const { name, avatarUrl, profileUrl } = authorInfo;
 
 	return (
 		<div className="flex flex-col h-screen">
 			<HeaderComponent
-				title={"name"}
-				avatarUrl={"avatarUrl"}
-				profileUrl={"profileUrl"}
+				title={name}
+				avatarUrl={avatarUrl}
+				profileUrl={profileUrl}
 			/>
 			{children}
 		</div>

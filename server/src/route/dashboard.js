@@ -20,7 +20,6 @@ dashboardRoute.get('/author/reviewedpr/list/:authorId', async (ctx) => {
 });
 
 dashboardRoute.get('/pullrequest/reviwers/list/:prId', async (ctx) => {
-	console.log(ctx.req.param().prId, 'ctx.req.param().prId');
 	const reviewersList = await getPrReviewersList(ctx, ctx.req.param().prId);
 	return ctx.json(reviewersList);
 });

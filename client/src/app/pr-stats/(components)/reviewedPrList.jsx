@@ -45,7 +45,6 @@ function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
 
 	async function showAndHideReviewers(id) {
 		setShowReviewersList((prevState) => !prevState);
-		console.log(id);
 		await getPrReviewersListApi(id)
 			.then((res) => setRewievers(res))
 			.catch((errRes) => console.log(errRes, "Error response"))

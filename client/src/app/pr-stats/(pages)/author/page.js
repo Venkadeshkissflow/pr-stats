@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { InfoCard, TableComponent, Toolbar } from "../../(components)/index";
 import { AUTHORS_LIST } from "./MOCK";
 import { TIME_PERIOD } from "@/app/constant";
-// import { getAuthorList } from "../../route";
+import { getAuthorList } from "../../route";
 
 export default function Page() {
 	const router = useRouter();
@@ -29,31 +29,21 @@ export default function Page() {
 
 	async function getContributorsList() {
 		setIsLoading(true);
-		// await getAuthorList()
-		// 	.then((res) => {
-		// 		setAuthorList(res);
-		// 		let totalCommentsCount = filterAuthorInfo(res, "totalComments");
-		// 		let totalReviewedPrs = filterAuthorInfo(res, "totalReviews");
-		// 		let totalReviewTime = filterAuthorInfo(res, "timeToReview");
-		// 		setTotalAuthorInfo({
-		// 			totalContributors: res.length,
-		// 			commentsCount: totalCommentsCount,
-		// 			reviewedPrsCount: totalReviewedPrs,
-		// 			totalReviewTime: totalReviewTime,
-		// 		});
-		// 	})
-		// 	.catch((errRes) => console.log(errRes, "Error response"))
-		// 	.finally(() => setIsLoading(false));
-		setAuthorList(AUTHORS_LIST);
-		let totalCommentsCount = filterAuthorInfo(AUTHORS_LIST, "totalComments");
-		let totalReviewedPrs = filterAuthorInfo(AUTHORS_LIST, "totalReviews");
-		let totalReviewTime = filterAuthorInfo(AUTHORS_LIST, "timeToReview");
-		setTotalAuthorInfo({
-			totalContributors: AUTHORS_LIST.length,
-			commentsCount: totalCommentsCount,
-			reviewedPrsCount: totalReviewedPrs,
-			totalReviewTime: totalReviewTime,
-		});
+		await getAuthorList()
+			.then((res) => {
+				setAuthorList(res);
+				let totalCommentsCount = filterAuthorInfo(res, "totalComments");
+				let totalReviewedPrs = filterAuthorInfo(res, "totalReviews");
+				let totalReviewTime = filterAuthorInfo(res, "timeToReview");
+				setTotalAuthorInfo({
+					totalContributors: res.length,
+					commentsCount: totalCommentsCount,
+					reviewedPrsCount: totalReviewedPrs,
+					totalReviewTime: totalReviewTime,
+				});
+			})
+			.catch((errRes) => console.log(errRes, "Error response"))
+			.finally(() => setIsLoading(false));
 	}
 
 	useEffect(function onLoad() {
