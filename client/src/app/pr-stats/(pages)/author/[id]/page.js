@@ -8,7 +8,7 @@ import { Card } from "@tremor/react";
 import { ChartComponent } from "@/app/pr-stats/(components)/chart";
 import { getFormattedDate } from "@/app/pr-stats/util";
 import { ReviewTimeChartWrapper } from "../reviewtimechartwrapper";
-import { ReviewedPrsList, TitleBar } from "@/app/pr-stats/(components)/";
+import { ReviewedPrsList, TitleBar } from "@/app/pr-stats/(components)";
 
 export default async function AuthorInfo({ params }) {
 	console.log(params, "params me");

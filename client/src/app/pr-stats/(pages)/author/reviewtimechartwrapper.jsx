@@ -6,7 +6,7 @@ import { getFormattedDate } from "../../util";
 import { convertMsToTime } from "../../util";
 import { Card } from "@tremor/react";
 import { ChartComponent } from "../../(components)/chart";
-import { TitleBar } from "../../(components)/";
+import { TitleBar } from "../../(components)";
 
 const timeFormatted = (timeInMS) => `${convertMsToTime(timeInMS)}`;
 

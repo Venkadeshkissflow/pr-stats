@@ -1,4 +1,4 @@
-import { Loader } from "@/app/pr-stats/(components)/";
+import { Loader } from "@/app/pr-stats/(components)";
 
 export default function Loading() {
 	return (
