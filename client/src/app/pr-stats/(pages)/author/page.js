@@ -2,11 +2,60 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+	addDoc,
+	getDocs,
+	collection,
+	query,
+	where,
+	doc,
+} from "firebase/firestore";
 
 import { InfoCard, TableComponent, Toolbar } from "../../(components)/index";
 import { AUTHORS_LIST } from "./MOCK";
 import { TIME_PERIOD } from "@/app/constant";
 import { getAuthorList } from "../../route";
+import { db } from "@/app/firebaseConfig";
+import { typescript } from "../../../../../next.config";
+
+async function addDataToFirestore({ id, name, profileUrl, avatarUrl }) {
+	try {
+		let docRef = await addDoc(collection(db, "contributors"), {
+			id: id,
+			name: name,
+			profileUrl: profileUrl,
+			avatarUrl: avatarUrl,
+		});
+		console.log(docRef, "db docRef");
+		return;
+	} catch (error) {
+		console.error(error, "error while adding data to db");
+		return;
+	}
+}
+
+async function getContributorsDataFromFirestore() {
+	try {
+		let authorQuerySnapshot = await getDocs(collection(db, "contributors"));
+		let result = [];
+		let authorInfoDoc = await getDocs(
+			collection(db, "contributors", "sara-63cN2xz4Gm7yApAiGkrg", "authorInfo")
+		);
+		let doc = authorInfoDoc.docs;
+		let fineData = doc[0];
+		console.log(fineData.data(), "new typescript");
+		authorInfoDoc.forEach(async (document) => {
+			console.log({ ...document.data() }, "document totalReviewedPr*****");
+		});
+
+		authorQuerySnapshot.forEach(async (document) => {
+			result.push({ newId: document.id, ...document.data() });
+		});
+		return result;
+	} catch (error) {
+		console.error(error, "failed to fetch contributors list");
+	}
+}
 
 export default function Page() {
 	const router = useRouter();
@@ -21,7 +70,7 @@ export default function Page() {
 		totalReviewTime: 0,
 	});
 
-	function filterAuthorInfo(authorList, keyToFilter) {
+	function filterAuthorInfo(authorList = [], keyToFilter) {
 		return authorList.reduce((acc, currentValue) => {
 			return acc + currentValue[keyToFilter];
 		}, 0);
@@ -30,7 +79,7 @@ export default function Page() {
 	async function getContributorsList() {
 		setIsLoading(true);
 		await getAuthorList()
-			.then((res) => {
+			.then((res = []) => {
 				setAuthorList(res);
 				let totalCommentsCount = filterAuthorInfo(res, "totalComments");
 				let totalReviewedPrs = filterAuthorInfo(res, "totalReviews");
@@ -47,7 +96,26 @@ export default function Page() {
 	}
 
 	useEffect(function onLoad() {
-		getContributorsList();
+		// getContributorsDataFromFirestore().then((contributors) => {
+		// 	console.log(contributors, "contributorsList******");
+		// });
+
+		getContributorsDataFromFirestore().then((contributors = []) => {
+			console.log(contributors, "contributors*******");
+			setAuthorList(contributors);
+			let totalCommentsCount = filterAuthorInfo(contributors, "totalComments");
+			let totalReviewedPrs = filterAuthorInfo(contributors, "totalReviews");
+			let totalReviewTime = filterAuthorInfo(contributors, "timeToReview");
+			setTotalAuthorInfo({
+				totalContributors: contributors.length,
+				commentsCount: totalCommentsCount,
+				reviewedPrsCount: totalReviewedPrs,
+				totalReviewTime: totalReviewTime,
+			});
+			setIsLoading(false);
+		});
+
+		// getContributorsList();
 	}, []);
 
 	function onFilterChange(timePeriod) {
