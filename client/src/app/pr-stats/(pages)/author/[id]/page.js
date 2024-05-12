@@ -1,9 +1,6 @@
 import React from "react";
 
-import {
-	getAuthorPrInfoApi,
-	getReviewedPrsListApi,
-} from "@/app/pr-stats/route";
+import { getReviewedPrListQuery } from "../../query";
 import { Card } from "@tremor/react";
 import { ChartComponent } from "@/app/pr-stats/(components)/chart";
 import { getFormattedDate } from "@/app/pr-stats/util";
@@ -11,14 +8,9 @@ import { ReviewTimeChartWrapper } from "../reviewtimechartwrapper";
 import { ReviewedPrsList, TitleBar } from "@/app/pr-stats/(components)";
 
 export default async function AuthorInfo({ params }) {
-	const reviewers = await getAuthorPrInfoApi(params.id);
-	const reviewedPrsList = await getReviewedPrsListApi(params.id);
+	const reviewedPrsList = await getReviewedPrListQuery(params.id);
 
-	// const { reviews: reviewers = [] } = authorInfo;
-
-	// console.log(authorInfo, "authorInfo**********");
-
-	const commentsCountFormattedData = reviewers.map(
+	const commentsCountFormattedData = reviewedPrsList.map(
 		function formatteDataForClientSide(prInfo) {
 			return {
 				...prInfo,
@@ -38,9 +30,8 @@ export default async function AuthorInfo({ params }) {
 					colors={["cyan"]}
 				/>
 			</Card>
-			<ReviewTimeChartWrapper reviewers={reviewers} />
-			reviewer info
-			<ReviewedPrsList reviewers={reviewers} />
+			<ReviewTimeChartWrapper reviewers={reviewedPrsList} />
+			<ReviewedPrsList reviewers={reviewedPrsList} />
 		</div>
 	);
 }

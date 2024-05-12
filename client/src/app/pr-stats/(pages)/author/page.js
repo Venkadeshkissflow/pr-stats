@@ -58,8 +58,8 @@ export default function Page() {
 			setAuthorList(filteredAuthorList);
 		}
 	}
-	function onRowClick(author) {
-		router.push(`/pr-stats/author/${author.id}`);
+	function onRowClick(authorId) {
+		router.push(`/pr-stats/author/${authorId}`);
 	}
 	return (
 		<div className="flex flex-col h-screen">

@@ -55,7 +55,7 @@ export function TableComponent({ isLoading, authorList, onRowClick }) {
 			<TableBody className={styles.tableComponent}>
 				{authorList.map((person) => (
 					<TableRow
-						onClick={() => onRowClick(person)}
+						onClick={() => onRowClick(person.authorId)}
 						className="bg-white hover:bg-slate-100 cursor-pointer"
 					>
 						<TableCell>

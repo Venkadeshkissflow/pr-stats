@@ -1,10 +1,10 @@
 import React from "react";
 
 import { HeaderComponent } from "@/app/pr-stats/(components)";
-import { getAuthorInfo } from "@/app/pr-stats/route";
+import { getAuthorInfoQuery } from "../../query";
 
 export default async function AuthorInfoLayout({ children, params }) {
-	const authorInfo = await getAuthorInfo(params.id);
+	const authorInfo = await getAuthorInfoQuery(params.id);
 
 	const { name, avatarUrl, profileUrl } = authorInfo;
 
