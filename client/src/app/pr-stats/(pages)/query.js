@@ -18,17 +18,27 @@ import { db } from "@/app/firebaseConfig";
 // 	}
 // }
 
+const COLLECTION = {
+	CONTRIBUTORS: "contributors",
+	REVIEWS: "reviews",
+};
+
+function getReviewedPrCollectionKey(authorId) {
+	return [db, COLLECTION.CONTRIBUTORS, authorId, COLLECTION.REVIEWS];
+}
+
+function getContributorsCollectionKey() {
+	return [db, COLLECTION.CONTRIBUTORS];
+}
+
 async function getDocsList(dbInfo) {
 	return await getDocs(collection(...dbInfo));
 }
 
 async function getPrInfo(authorId) {
-	let prInfoCollectionSnapshot = await getDocsList([
-		db,
-		"contributors",
-		authorId,
-		"reviews",
-	]);
+	let prInfoCollectionSnapshot = await getDocsList(
+		getReviewedPrCollectionKey(authorId)
+	);
 	return prInfoCollectionSnapshot.docs[0].data();
 }
 
@@ -41,7 +51,7 @@ function getAuthorsList(authorsDocList) {
 
 export async function getContributorsList() {
 	try {
-		let collectionSnapshot = await getDocsList([db, "contributors"]);
+		let collectionSnapshot = await getDocsList(getContributorsCollectionKey());
 		return getAuthorsList(collectionSnapshot.docs);
 	} catch (error) {
 		console.error(error, "failed to fetch contributors list");
