@@ -6,6 +6,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+
 }
 
 @media (prefers-color-scheme: light) {
@@ -19,4 +21,19 @@
 :root body {
   margin: 0px;
   background-color: white;
+
+  /* bg color  */
+  --primary-bg-100: "#010409";
+  --primary-bg-200: "#0c1117";
+  --border-bg-color: "#30363e";
+  --hover-bg-color: "#20262c";
+
+  /* card  */
+  --card-header-bg-color: "#0c1117";
+  --card-border-color: "#1e6feb";
+
+  /* font color */
+  --primary-font-color: "#e6edf4";
+  --secondary-font-color: "#858d97";
+  --active-font-color: "#4593f8"
 }
