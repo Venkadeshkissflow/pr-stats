@@ -61,23 +61,3 @@ function PrInfoCard({ prTitle, commentsCount, timeToReview = 0 }) {
 		</Card>
 	);
 }
-
-function ReviewerCard({ avatarUrl, name, id }) {
-	const router = useRouter();
-
-	function updateAuthorPage(id) {
-		router.push(`/pr-stats/author/${id}`);
-	}
-
-	return (
-		<Card
-			onClick={() => updateAuthorPage(id)}
-			className="p-1 flex gap-2 items-center w-36 h-fit cursor-pointer"
-		>
-			<span>
-				<img className="h-5 w-5 rounded" src={avatarUrl} alt="" />
-			</span>
-			<span className="text-xs">{name}</span>
-		</Card>
-	);
-}
