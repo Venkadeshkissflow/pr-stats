@@ -5,9 +5,6 @@ import { Card } from "@tremor/react";
 import { Icon } from "@tremor/react";
 import { RiGitPullRequestFill } from "@remixicon/react";
 
-import styles from "./styles.module.css";
-import { Loader } from ".";
-
 export function ReviewedPrsList({ reviewers }) {
 	return (
 		<Card className="p-0">
