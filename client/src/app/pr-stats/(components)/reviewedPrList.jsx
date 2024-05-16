@@ -1,17 +1,9 @@
 "use client";
-
-import React, { useState } from "react";
-
-import { Button } from "@tremor/react";
+import React from "react";
 
 import { Card } from "@tremor/react";
 import { Icon } from "@tremor/react";
-import { useRouter } from "next/navigation";
-import {
-	RiGitPullRequestFill,
-	RiArrowDownSFill,
-	RiArrowUpSFill,
-} from "@remixicon/react";
+import { RiGitPullRequestFill } from "@remixicon/react";
 
 import styles from "./styles.module.css";
 import { Loader } from ".";
