@@ -11,13 +11,7 @@ export const DASHBOARD_TYPE = {
 	COMMON_DASHBOARD: "dashboard",
 };
 
-export const PR_STATS_DOMAIN_URL = "http://localhost:8787";
-// export const PR_STATS_DOMAIN_URL =
-// 	"https://pr-stats.venkadeshrenugadevi.workers.dev";
-
 export const GITHUB_ACTION_DOMAIN_URL = "https://api.github.com/repos";
-
-export const TOP_REVIEWERS_COUNT = 5;
 
 export const TIME_RANGE = {
 	LAST_30DAYS: { id: "last-30days", label: "last 30 days" },

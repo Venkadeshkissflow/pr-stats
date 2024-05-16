@@ -13,8 +13,6 @@ import {
 	RiArrowUpSFill,
 } from "@remixicon/react";
 
-import { getPrReviewersListApi } from "../route";
-
 import styles from "./styles.module.css";
 import { Loader } from ".";
 
@@ -27,7 +25,6 @@ export function ReviewedPrsList({ reviewers }) {
 				{reviewers.map(({ pullRequestId, commentsCount, timeToReview }) => (
 					<PrInfoCard
 						key={pullRequestId}
-						id={pullRequestId}
 						prTitle={pullRequestId}
 						commentsCount={commentsCount}
 						totalReviewTime={timeToReview}
@@ -38,79 +35,30 @@ export function ReviewedPrsList({ reviewers }) {
 	);
 }
 
-function PrInfoCard({ id, prTitle, commentsCount, timeToReview = 0 }) {
-	const [showReviewersList, setShowReviewersList] = useState(false);
-	const [reviewers, setRewievers] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-
-	async function showAndHideReviewers(id) {
-		setShowReviewersList((prevState) => !prevState);
-		await getPrReviewersListApi(id)
-			.then((res) => setRewievers(res))
-			.catch((errRes) => console.log(errRes, "Error response"))
-			.finally(() => setIsLoading(false));
-	}
-
+function PrInfoCard({ prTitle, commentsCount, timeToReview = 0 }) {
 	return (
-		<div>
-			<Card
-				onClick={() => showAndHideReviewers(id)}
-				className="flex p-4 items-center gap-4 z-10"
-			>
-				<Icon
-					icon={RiGitPullRequestFill}
-					variant="simple"
-					size="md"
-					borderRadius="Roundness"
-				/>
-				<div className="flex flex-col grow shrink basis-auto">
-					<span className="text-slate-700 hover:text-blue-400	font-semibold text-base	cursor-default	cursor-pointer w-fit">
-						{prTitle}
+		<Card className="flex p-4 items-center gap-4 z-10">
+			<Icon
+				icon={RiGitPullRequestFill}
+				variant="simple"
+				size="md"
+				borderRadius="Roundness"
+			/>
+			<div className="flex flex-col grow shrink basis-auto">
+				<span className="text-slate-700 hover:text-blue-400	font-semibold text-base	cursor-default	cursor-pointer w-fit">
+					{prTitle}
+				</span>
+				{/* <span>{prLink}</span> */}
+				<div className="flex gap-4">
+					<span className="text-slate-500	text-sm	cursor-default ">
+						Comments count: {commentsCount}
 					</span>
-					{/* <span>{prLink}</span> */}
-					<div className="flex gap-4">
-						<span className="text-slate-500	text-sm	cursor-default ">
-							Comments count: {commentsCount}
-						</span>
-						<span className="text-slate-500	text-sm	cursor-default	">
-							Total reviewed time: {timeToReview}
-						</span>
-					</div>
+					<span className="text-slate-500	text-sm	cursor-default	">
+						Total reviewed time: {timeToReview}
+					</span>
 				</div>
-				<Button
-					className="h-fit flex items-center"
-					variant="light"
-					icon={showReviewersList ? RiArrowUpSFill : RiArrowDownSFill}
-					iconPosition={"right"}
-				>
-					View reviewers
-				</Button>
-			</Card>
-			<Card
-				className={`p-0 bg-slate-100 ${styles.reviewersList} ${
-					showReviewersList
-						? styles.showReviewersList
-						: styles.hideReviewersList
-				}`}
-			>
-				{isLoading ? (
-					<div className="h-full flex items-center justify-center">
-						<Loader />
-					</div>
-				) : (
-					<>
-						{reviewers.map(({ id, name, avatarUrl }) => (
-							<ReviewerCard
-								key={id}
-								id={id}
-								name={name}
-								avatarUrl={avatarUrl}
-							/>
-						))}
-					</>
-				)}
-			</Card>
-		</div>
+			</div>
+		</Card>
 	);
 }
 
