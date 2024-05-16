@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 import { InfoCard, TableComponent, Toolbar } from "../../(components)/index";
-import { AUTHORS_LIST } from "./MOCK";
 import { TIME_PERIOD } from "@/app/constant";
 import { getContributorsList } from "../query";
 
 export default function Page() {
 	const router = useRouter();
 
+	const authorListSourceRef = useRef([]);
 	const [filterParam, setFilterParam] = useState(TIME_PERIOD.DEFAULT);
 	const [authorList, setAuthorList] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +30,7 @@ export default function Page() {
 	useEffect(function onLoad() {
 		getContributorsList().then((contributors) => {
 			setAuthorList(contributors);
+			authorListSourceRef.current = contributors;
 			let totalCommentsCount = filterAuthorInfo(contributors, "totalComments");
 			let totalReviewedPrs = filterAuthorInfo(contributors, "totalReviews");
 			let totalReviewTime = filterAuthorInfo(contributors, "timeToReview");
@@ -50,9 +51,9 @@ export default function Page() {
 	}
 	function onSearchChange(searchValue) {
 		if (searchValue === "") {
-			setAuthorList(AUTHORS_LIST);
+			setAuthorList(authorListSourceRef.current);
 		} else {
-			let filteredAuthorList = AUTHORS_LIST.filter((author) => {
+			let filteredAuthorList = authorListSourceRef.current.filter((author) => {
 				return author.name.toLowerCase().includes(searchValue.toLowerCase());
 			});
 			setAuthorList(filteredAuthorList);
