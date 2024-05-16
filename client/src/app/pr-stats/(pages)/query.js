@@ -22,7 +22,12 @@ const COLLECTION = {
 	CONTRIBUTORS: "contributors",
 	REVIEWS: "reviews",
 	STATS: "stats",
+	URL: "urls",
 };
+
+function getUrlCollectionKey(authorId) {
+	return [db, COLLECTION.CONTRIBUTORS, authorId, COLLECTION.URL];
+}
 
 function getReviewedPrCollectionKey(authorId) {
 	return [db, COLLECTION.CONTRIBUTORS, authorId, COLLECTION.REVIEWS];
@@ -83,6 +88,18 @@ export async function getReviewedPrListQuery(authorId) {
 			getReviewedPrCollectionKey(authorId)
 		);
 		return getReviewedPrsList(collectionSnapshot.docs);
+	} catch (error) {
+		console.error(error, "failed to fetch contributors list");
+	}
+}
+
+export async function getReviewTimeUrl(authorId) {
+	try {
+		let collectionSnapshot = await getDocsListFromCollection(
+			getUrlCollectionKey(authorId)
+		);
+		let reviewTime = collectionSnapshot.docs[0].data();
+		return reviewTime;
 	} catch (error) {
 		console.error(error, "failed to fetch contributors list");
 	}
