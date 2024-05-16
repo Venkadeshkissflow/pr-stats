@@ -1,2 +1,0 @@
-CREATE TABLE IF NOT EXISTS author (id Text PRIMARY KEY, name TEXT, profileUrl TEXT, avatarUrl TEXT);
-CREATE TABLE IF NOT EXISTS review (id Text PRIMARY KEY, authorId TEXT, pullRequestId TEXT, commentsCount NUMBER, timeToReview REAL, submittedAt TEXT, FOREIGN KEY(authorId) REFERENCES author(id));

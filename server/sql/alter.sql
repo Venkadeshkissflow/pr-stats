@@ -1,1 +1,0 @@
-ALTER TABLE author ADD COLUMN totalComments NUMBER
