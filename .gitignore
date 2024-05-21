@@ -4,6 +4,7 @@ pnpm-lock.yaml
 .next
 package-lock.json
 .env
+.firebase
 
 
 *.log
