@@ -18,7 +18,7 @@ import { db } from "@/app/firebaseConfig";
 // 	}
 // }
 
-const COLLECTION = {
+export const COLLECTIONS = {
 	CONTRIBUTORS: "contributors",
 	REVIEWS: "reviews",
 	STATS: "stats",
@@ -26,23 +26,23 @@ const COLLECTION = {
 };
 
 function getUrlCollectionKey(authorId) {
-	return [db, COLLECTION.CONTRIBUTORS, authorId, COLLECTION.URL];
+	return [db, COLLECTIONS.CONTRIBUTORS, authorId, COLLECTIONS.URL];
 }
 
 function getReviewedPrCollectionKey(authorId) {
-	return [db, COLLECTION.CONTRIBUTORS, authorId, COLLECTION.REVIEWS];
+	return [db, COLLECTIONS.CONTRIBUTORS, authorId, COLLECTIONS.REVIEWS];
 }
 
 function getPrStatsCollectionKey(authorId) {
-	return [db, COLLECTION.CONTRIBUTORS, authorId, COLLECTION.STATS];
+	return [db, COLLECTIONS.CONTRIBUTORS, authorId, COLLECTIONS.STATS];
 }
 
 function getContributorsCollectionKey() {
-	return [db, COLLECTION.CONTRIBUTORS];
+	return [db, COLLECTIONS.CONTRIBUTORS];
 }
 
 function getAuthorInfoCollectionKey(authorId) {
-	return [db, COLLECTION.CONTRIBUTORS, authorId];
+	return [db, COLLECTIONS.CONTRIBUTORS, authorId];
 }
 
 async function getDocsListFromCollection(dbInfo) {
