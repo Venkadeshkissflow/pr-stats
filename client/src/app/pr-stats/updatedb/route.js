@@ -11,33 +11,22 @@ import {
 	where,
 } from "firebase/firestore";
 
-import { MOCK_DATA, COLLECTIONS } from "./mock";
 import { db } from "@/app/firebaseConfig";
 
-const newDocData = {
-	commentsCount: 2,
-	pullRequestId: "new-pr-id-by-mock-001",
-	reviewTime: 492000,
-	submittedAt: "2022-09-25T17:30:33.000Z",
-};
+async function updateUserReviewedPr(contributorId, prinfo) {
+	let reviewedPrsRef = collection(db, "contributors", contributorId, "reviews");
 
-const githubUserId = "saravanan10393";
-
-async function updateUserReviewedPr(contributor, prinfo) {
-	const docRef = await addDoc(
-		collection(db, "contributors", contributor.id, "reviews"),
-		prinfo
-	);
+	const docRef = await addDoc(reviewedPrsRef, prinfo);
 	return docRef.id;
 }
 
-async function getReviewerInfo(filterContributor) {
-	const querySnapshot = await getDocs(filterContributor);
-	let existingContributors = [];
+async function getData(querySnap) {
+	const querySnapshot = await getDocs(querySnap);
+	let list = [];
 	querySnapshot.forEach((doc) => {
-		existingContributors.push({ id: doc.id, data: doc.data() });
+		list.push({ id: doc.id, data: doc.data() });
 	});
-	return existingContributors;
+	return list;
 }
 
 export async function POST(request) {
@@ -47,24 +36,34 @@ export async function POST(request) {
 	const contributorsRef = collection(db, "contributors");
 
 	data["reviewers"].forEach(async (reviewer) => {
-		let userId = reviewer["author"]["login"];
+		const authorInfo = reviewer["author"];
+		const userId = authorInfo["login"];
+		const reviewedPrs = reviewer["reviews"];
+
 		const filterContributor = query(
 			contributorsRef,
 			where("githubUserId", "==", userId)
 		);
 
-		let existingContributors = await getReviewerInfo(filterContributor);
+		let existingContributors = await getData(filterContributor);
 
 		if (existingContributors.length > 0) {
 			let [contributor] = existingContributors;
-			let reviewedPrList = reviewer["reviews"];
-			reviewedPrList.forEach(async (prinfo) => {
-				let updatedDocId = await updateUserReviewedPr(contributor, prinfo);
+			reviewedPrs.forEach(async (prinfo) => {
+				let updatedDocId = await updateUserReviewedPr(contributor.id, prinfo);
 				console.log({ updatedDocId }, "updatedDocId");
 			});
+		} else {
+			console.log("new contributor", authorInfo);
+			const docRef = await addDoc(collection(db, "contributors"), authorInfo);
+
+			reviewedPrs.forEach((prInfo) => {
+				updateUserReviewedPr(docRef.id, prInfo);
+			});
+
+			console.log("new data ", { newData: docRef.id });
 		}
 	});
-	// let queryList = querySnapshot.map((author) => author.data());
 	return NextResponse.json({
 		message: "Success ping pong",
 		data,
