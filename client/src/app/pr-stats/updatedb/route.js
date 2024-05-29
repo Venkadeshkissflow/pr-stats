@@ -55,7 +55,17 @@ export async function POST(request) {
 			});
 		} else {
 			console.log("new contributor", authorInfo);
-			const docRef = await addDoc(collection(db, "contributors"), authorInfo);
+			const { id, login, ...restInfo } = authorInfo;
+			let contributorData = {
+				...restInfo,
+				profileUrl: authorInfo["url"],
+				name: authorInfo["login"],
+				githubUserId: authorInfo["login"],
+			};
+			const docRef = await addDoc(
+				collection(db, "contributors"),
+				contributorData
+			);
 
 			reviewedPrs.forEach((prInfo) => {
 				updateUserReviewedPr(docRef.id, prInfo);
