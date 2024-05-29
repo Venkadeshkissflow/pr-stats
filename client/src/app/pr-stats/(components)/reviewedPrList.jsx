@@ -26,7 +26,7 @@ export function ReviewedPrsList({ reviewers }) {
 
 function PrInfoCard({ prTitle, commentsCount, timeToReview = 0 }) {
 	return (
-		<Card className="flex p-4 items-center gap-4 z-10">
+		<Card className="flex p-4 items-center gap-4 z-10 border border-slate-300	">
 			<Icon
 				icon={RiGitPullRequestFill}
 				variant="simple"

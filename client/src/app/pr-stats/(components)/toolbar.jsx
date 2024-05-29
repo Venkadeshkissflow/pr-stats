@@ -8,8 +8,9 @@ import { FilterInput } from "./filterInput";
 export function Toolbar({ onSearch, onFilter }) {
 	return (
 		<div className="flex items-center h-full justify-between">
+			<div>.</div>
 			<SearchInput onSearch={onSearch} />
-			<FilterInput onFilter={onFilter} />
+			{/* <FilterInput onFilter={onFilter} /> */}
 		</div>
 	);
 }
