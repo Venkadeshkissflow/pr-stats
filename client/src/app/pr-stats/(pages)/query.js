@@ -53,7 +53,7 @@ async function getPrStatsInfo(authorId) {
 	let collectionSnap = await getDocsListFromCollection(
 		getPrStatsCollectionKey(authorId)
 	);
-	return collectionSnap.docs[0].data();
+	return collectionSnap.docs.length > 0 ? collectionSnap.docs[0].data() : {};
 }
 
 async function getAuthorWithReviewedPr(docSnap) {
