@@ -13,10 +13,18 @@ import {
 
 import { db } from "@/app/firebaseConfig";
 
-async function updateUserReviewedPr(contributorId, prinfo) {
-	let reviewedPrsRef = collection(db, "contributors", contributorId, "reviews");
+function reviewsCollectionKey(contributorId) {
+	return [db, "contributors", contributorId, "reviews"];
+}
 
-	const docRef = await addDoc(reviewedPrsRef, prinfo);
+function statsCollectionKey(contributorId) {
+	return [db, "contributors", contributorId, "stats"];
+}
+
+async function createDoc(collectionKey, documentData) {
+	let collectionRef = collection(...collectionKey);
+
+	const docRef = await addDoc(collectionRef, documentData);
 	return docRef.id;
 }
 
@@ -39,6 +47,7 @@ export async function POST(request) {
 		const authorInfo = reviewer["author"];
 		const userId = authorInfo["login"];
 		const reviewedPrs = reviewer["reviews"];
+		const stats = reviewer["stats"];
 
 		const filterContributor = query(
 			contributorsRef,
@@ -50,7 +59,10 @@ export async function POST(request) {
 		if (existingContributors.length > 0) {
 			let [contributor] = existingContributors;
 			reviewedPrs.forEach(async (prinfo) => {
-				let updatedDocId = await updateUserReviewedPr(contributor.id, prinfo);
+				let updatedDocId = await createDoc(
+					reviewsCollectionKey(contributor.id),
+					prinfo
+				);
 				console.log({ updatedDocId }, "updatedDocId");
 			});
 		} else {
@@ -62,13 +74,19 @@ export async function POST(request) {
 				name: authorInfo["login"],
 				githubUserId: authorInfo["login"],
 			};
+
+			//create collection and update authorInfo
 			const docRef = await addDoc(
 				collection(db, "contributors"),
 				contributorData
 			);
 
-			reviewedPrs.forEach((prInfo) => {
-				updateUserReviewedPr(docRef.id, prInfo);
+			//update stats
+			await createDoc(statsCollectionKey(docRef.id), stats);
+
+			//update reviewed prs
+			reviewedPrs.forEach(async (prInfo) => {
+				await createDoc(reviewsCollectionKey(docRef.id), prInfo);
 			});
 
 			console.log("new data ", { newData: docRef.id });
