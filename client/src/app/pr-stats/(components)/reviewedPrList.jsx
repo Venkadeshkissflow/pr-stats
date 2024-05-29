@@ -7,10 +7,10 @@ import { RiGitPullRequestFill } from "@remixicon/react";
 
 export function ReviewedPrsList({ reviewers }) {
 	return (
-		<Card className="p-0">
+		<Card className="p-0 flex flex-col h-[35rem] overflow-hidden">
 			<div className="m-4 text-slate-800">Reviewed pull requests list</div>
 			<span className="block h-px bg-slate-200" />
-			<div className="m-4 flex flex-col gap-4">
+			<div className="m-4 flex flex-col gap-4 overflow-auto">
 				{reviewers.map(({ pullRequestId, commentsCount, timeToReview }) => (
 					<PrInfoCard
 						key={pullRequestId}
