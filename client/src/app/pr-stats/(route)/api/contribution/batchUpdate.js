@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import {
 	doc,
 	getDoc,
@@ -37,10 +36,7 @@ async function getData(querySnap) {
 	return list;
 }
 
-export async function POST(request) {
-	let jsonAsString = await new Response(request.body).text();
-	let data = JSON.parse(jsonAsString);
-
+export async function batchUpdate(data) {
 	const contributorsRef = collection(db, "contributors");
 
 	data["reviewers"].forEach(async (reviewer) => {
@@ -58,10 +54,10 @@ export async function POST(request) {
 
 		if (existingContributors.length > 0) {
 			let [contributor] = existingContributors;
-			reviewedPrs.forEach(async (prinfo) => {
+			reviewedPrs.forEach(async (reviewInfo) => {
 				let updatedDocId = await createDoc(
 					reviewsCollectionKey(contributor.id),
-					prinfo
+					reviewInfo
 				);
 				console.log({ updatedDocId }, "updatedDocId");
 			});
@@ -91,9 +87,5 @@ export async function POST(request) {
 
 			console.log("new data ", { newData: docRef.id });
 		}
-	});
-	return NextResponse.json({
-		message: "Success ping pong",
-		data,
 	});
 }
