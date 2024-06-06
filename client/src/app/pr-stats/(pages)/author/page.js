@@ -7,6 +7,12 @@ import { InfoCard, TableComponent, Toolbar } from "../../(components)/index";
 import { TIME_PERIOD } from "@/app/constant";
 import { getContributorsList } from "../query";
 
+function filterAuthorInfo(authorList = [], keyToFilter) {
+	return authorList.reduce((acc, currentValue) => {
+		return acc + currentValue[keyToFilter];
+	}, 0);
+}
+
 export default function Page() {
 	const router = useRouter();
 
@@ -20,12 +26,6 @@ export default function Page() {
 		reviewedPrsCount: 0,
 		totalReviewTime: 0,
 	});
-
-	function filterAuthorInfo(authorList = [], keyToFilter) {
-		return authorList.reduce((acc, currentValue) => {
-			return acc + currentValue[keyToFilter];
-		}, 0);
-	}
 
 	useEffect(function onLoad() {
 		getContributorsList().then((contributors) => {
