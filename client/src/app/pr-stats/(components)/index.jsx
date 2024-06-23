@@ -8,3 +8,4 @@ export { ReviewedPrsList } from "./reviewedPrList";
 export { TitleBar } from "./titlebar";
 export { Divider } from "./divider";
 export { Loader } from "./loader";
+export { StatsInfoCard } from "./card";
